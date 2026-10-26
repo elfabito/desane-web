@@ -89,6 +89,8 @@ const certificates = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      // Language of the official title, kept as issued in both versions of the site
+      lang: z.enum(['es', 'en']),
       institution: z.string(),
       // A full date, or just the year when the certificate only states that
       date: z.string().regex(/^\d{4}(-\d{2}-\d{2})?$/),

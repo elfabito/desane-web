@@ -1,6 +1,20 @@
 // @ts-check
+import { rename, rmdir } from 'node:fs/promises';
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+
+// Astro writes the English 404 to en/404/index.html, but Cloudflare Pages answers a missing
+// URL with the closest 404.html, so it has to sit at en/404.html to cover /en/*
+/** @type {import('astro').AstroIntegration} */
+const englishNotFound = {
+  name: 'english-404',
+  hooks: {
+    'astro:build:done': async ({ dir }) => {
+      await rename(new URL('en/404/index.html', dir), new URL('en/404.html', dir));
+      await rmdir(new URL('en/404/', dir));
+    },
+  },
+};
 
 export default defineConfig({
   site: 'https://desane.com.uy',
@@ -9,6 +23,7 @@ export default defineConfig({
     defaultLocale: 'es',
     routing: { prefixDefaultLocale: false },
   },
+  integrations: [englishNotFound],
   vite: {
     plugins: [tailwindcss()],
   },

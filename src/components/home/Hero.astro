@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 const profile = await getProfile();
 ---
 
-<section id="sobre-mi" aria-labelledby="hero-title" class="container-page pb-16 md:pb-24">
+<section id={t('anchor.about')} aria-labelledby="hero-title" class="container-page pb-16 md:pb-24">
   <div class="grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14 lg:gap-20">
     <div class="-mt-14 flex justify-center md:-mt-18 md:block md:self-start">
       <div class="photo-frame w-60 rounded-[2rem] p-2.5 shadow-xl shadow-black/10 sm:w-72 md:w-full md:max-w-md">
@@ -51,8 +51,8 @@ const profile = await getProfile();
       </p>
 
       <div class="mt-8 flex flex-wrap gap-3">
-        <ButtonLink href="#contacto" lang={lang} icon="mail">{t('hero.contact')}</ButtonLink>
-        <ButtonLink href="#desarrollo" lang={lang} variant="secondary">{t('hero.projects')}</ButtonLink>
+        <ButtonLink href={`#${t('anchor.contact')}`} lang={lang} icon="mail">{t('hero.contact')}</ButtonLink>
+        <ButtonLink href={`#${t('anchor.dev')}`} lang={lang} variant="secondary">{t('hero.projects')}</ButtonLink>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ const { contact } = await getProfile();
 const whatsappUrl = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t('contact.whatsappMessage'))}`;
 ---
 
-<section id="contacto" aria-labelledby="contact-title" class="bg-sea-soft">
+<section id={t('anchor.contact')} aria-labelledby="contact-title" class="bg-sea-soft">
   <div class="container-page py-16 md:py-24">
     <SectionHeading id="contact-title" title={t('contact.title')} intro={t('contact.intro')} align="center" />
     <ul class="flex flex-wrap justify-center gap-3" data-reveal>

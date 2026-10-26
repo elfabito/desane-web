@@ -57,7 +57,8 @@ const t = useTranslations(lang);
 
   const play = (link: HTMLAnchorElement) => {
     const iframe = document.createElement('iframe');
-    iframe.src = `https://www.youtube-nocookie.com/embed/${link.dataset.videoId}?autoplay=1&rel=0&playsinline=1`;
+    // hl puts the player controls in the page language
+    iframe.src = `https://www.youtube-nocookie.com/embed/${link.dataset.videoId}?autoplay=1&rel=0&playsinline=1&hl=${document.documentElement.lang}`;
     iframe.title = link.dataset.title ?? '';
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.allowFullscreen = true;

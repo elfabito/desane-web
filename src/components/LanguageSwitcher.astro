@@ -3,9 +3,11 @@ import { langs, languages, translatePath, useTranslations, type Lang } from '../
 
 interface Props {
   lang: Lang;
+  /** Page whose versions the links point to, the current one by default */
+  pathname?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, pathname = Astro.url.pathname } = Astro.props;
 const t = useTranslations(lang);
 ---
 
@@ -15,7 +17,7 @@ const t = useTranslations(lang);
       langs.map((code) => (
         <li>
           <a
-            href={translatePath(Astro.url.pathname, code)}
+            href={translatePath(pathname, code)}
             hreflang={code}
             lang={code}
             aria-current={code === lang ? 'true' : undefined}

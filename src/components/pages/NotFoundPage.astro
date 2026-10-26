@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../PageHeader.astro';
+import ButtonLink from '../ui/ButtonLink.astro';
+import { localizePath, useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('meta.notFound.title')} description={t('notFound.text')}>
+  {/* This page answers any missing URL, so the language switcher goes to the other home */}
+  <PageHeader slot="header" lang={lang} pathname="/" />
+  <div class="container-page py-20 md:py-28">
+    <div class="mx-auto max-w-xl text-center">
+      <p class="font-display text-7xl font-extrabold tracking-tight text-accent-strong md:text-8xl" aria-hidden="true">
+        404
+      </p>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight md:text-4xl">{t('notFound.title')}</h1>
+      <span class="mx-auto mt-4 block h-1 w-14 rounded-full bg-accent" aria-hidden="true"></span>
+      <p class="mt-5 text-lg text-pretty text-muted">{t('notFound.text')}</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <ButtonLink href={localizePath('/', lang)} lang={lang} icon="arrowLeft">{t('header.home')}</ButtonLink>
+        <ButtonLink href={localizePath('/proyectos/', lang)} lang={lang} variant="secondary">
+          {t('notFound.projects')}
+        </ButtonLink>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

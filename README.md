@@ -7,7 +7,7 @@ Personal portfolio of Fabián Martínez, Full-Stack Developer: [desane.com.uy](h
 ## Highlights
 
 - **Static and fast:** built with Astro, no client framework. Images are resized and served as AVIF or WebP at build time.
-- **Bilingual:** Spanish at `/`, English at `/en/`. The language switcher keeps you on the same page in the other language.
+- **Bilingual:** Spanish at `/`, English at `/en/`. The language switcher keeps you on the same page in the other language, and a missing page gets a 404 in the language of its URL.
 - **Light and dark themes:** follows the system setting, with a light bulb toggle that remembers the visitor's choice without a flash on load.
 - **Works without JavaScript:** scripts only add filters, the image lightbox, video players and the theme toggle on top of plain HTML.
 - **Accessible:** keyboard navigation, screen reader labels and respect for reduced motion.
@@ -38,11 +38,11 @@ Everything shown on the site lives in `src/content/` as YAML, with each text in 
 | `src/content/profile.yaml` | Name, contact details, bio, skills and education |
 | `src/content/projects/` | Development projects (`featured: true` shows one large on the home page, the rest go under "More projects") |
 | `src/content/design-works/` | Design, 3D and animation work shown at `/proyectos` (`featured: true` adds it to the home page, up to four) |
-| `src/content/certificates/` | Certificates |
+| `src/content/certificates/` | Certificates, with their official title in the language it was issued in (`lang`) |
 | `src/content/client-sites/` | Client websites, shown as scrollable screenshots (`visible: false` hides one) |
 | `src/i18n/ui.ts` | Interface texts in both languages |
 
-The schemas in `src/content.config.ts` check every entry, so a missing field or translation fails the build with a clear message.
+The schemas in `src/content.config.ts` check every entry, so a missing field or translation fails the build with a clear message. In `src/i18n/ui.ts`, a text missing from one language fails `npm run check`.
 
 ## License
 

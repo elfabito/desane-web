@@ -15,7 +15,7 @@ const featured = projects.filter((project) => project.data.featured);
 const others = projects.filter((project) => !project.data.featured);
 ---
 
-<section id="desarrollo" aria-labelledby="dev-title">
+<section id={t('anchor.dev')} aria-labelledby="dev-title">
   <div class="container-page py-16 md:py-24">
     <SectionHeading id="dev-title" eyebrow={t('dev.eyebrow')} title={t('dev.title')} intro={t('dev.intro')} />
 

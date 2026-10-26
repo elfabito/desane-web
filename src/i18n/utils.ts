@@ -9,8 +9,19 @@ export function useTranslations(lang: Lang) {
   return (key: UiKey, vars: Record<string, string> = {}): string =>
     Object.entries(vars).reduce<string>(
       (text, [name, value]) => text.replaceAll(`{${name}}`, value),
-      ui[lang][key] ?? ui[defaultLang][key],
+      ui[lang][key],
     );
+}
+
+// 'projects.count' for the 'projects.count.one' / 'projects.count.other' pair
+type PluralKey<K = UiKey> = K extends `${infer Base}.one` ? Base : never;
+
+/** `tn('projects.count', 3)` picks the plural form the language uses for 3 and fills `{count}`. */
+export function usePlural(lang: Lang) {
+  const t = useTranslations(lang);
+  const rules = new Intl.PluralRules(lang);
+  return (key: PluralKey, count: number): string =>
+    t(`${key}.${rules.select(count) === 'one' ? 'one' : 'other'}`, { count: String(count) });
 }
 
 /** Formats `YYYY` as is and `YYYY-MM-DD` as a short month and year. */

@@ -3,7 +3,7 @@ import CertificateGrid from './CertificateGrid.astro';
 import Icon from '../ui/Icon.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import { getCertificates, getProfile } from '../../lib/content';
-import { useTranslations, type Lang } from '../../i18n/utils';
+import { usePlural, useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
   lang: Lang;
@@ -11,6 +11,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const tn = usePlural(lang);
 const { education } = await getProfile();
 const certificateCount = (await getCertificates()).length;
 ---
@@ -30,7 +31,7 @@ const certificateCount = (await getCertificates()).length;
         <span>
           <h3 class="text-xl font-bold tracking-tight">{t('education.certificates')}</h3>
           <span class="mt-0.5 block text-sm text-muted">
-            {t('education.count', { count: String(certificateCount) })}
+            {tn('education.count', certificateCount)}
           </span>
         </span>
         <span class="flex shrink-0 items-center gap-3 text-sm font-semibold text-accent-strong">

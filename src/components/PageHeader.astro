@@ -7,10 +7,12 @@ import { localizePath, useTranslations, type Lang } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
+  /** Passed on to the language switcher */
+  pathname?: string;
 }
 
 // Compact sky band for inner pages: the home works as a CV, so it is the only link needed
-const { lang } = Astro.props;
+const { lang, pathname } = Astro.props;
 const t = useTranslations(lang);
 const { name, role } = await getProfile();
 ---
@@ -34,7 +36,7 @@ const { name, role } = await getProfile();
     </a>
     <div class="flex items-center gap-2">
       <ThemeToggle lang={lang} />
-      <LanguageSwitcher lang={lang} />
+      <LanguageSwitcher lang={lang} pathname={pathname} />
     </div>
   </div>
 </header>

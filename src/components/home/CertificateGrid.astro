@@ -22,7 +22,7 @@ const certificates = await Promise.all(
 
 <ul class="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
   {
-    certificates.map(({ title, institution, date, image, large, verifyUrl, credentialId }) => (
+    certificates.map(({ title, lang: titleLang, institution, date, image, large, verifyUrl, credentialId }) => (
       <li>
         <article class="flex h-full flex-col overflow-hidden rounded-xl bg-surface ring-1 ring-border">
           <a
@@ -44,7 +44,10 @@ const certificates = await Promise.all(
             <span class="sr-only">{t('education.enlarge', { title })}</span>
           </a>
           <div class="flex flex-1 flex-col p-4">
-            <h4 class="text-sm leading-snug font-bold">{title}</h4>
+            {/* So screen readers pronounce a title in the other language correctly */}
+            <h4 class="text-sm leading-snug font-bold" lang={titleLang !== lang ? titleLang : undefined}>
+              {title}
+            </h4>
             <p class="mt-1 text-sm text-muted">{institution}</p>
             <div class="mt-auto flex items-center justify-between gap-3 pt-3 text-xs text-muted">
               <time datetime={date}>{formatDate(date, lang)}</time>
