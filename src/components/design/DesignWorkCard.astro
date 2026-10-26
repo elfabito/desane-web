@@ -1,0 +1,51 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Icon from '../ui/Icon.astro';
+import { coverOf } from '../../lib/content';
+import { localizePath, useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  work: CollectionEntry<'design-works'>;
+  lang: Lang;
+  headingLevel?: 'h3' | 'h2';
+  /** Defaults to the four-column row on the home page */
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  work,
+  lang,
+  headingLevel: Heading = 'h3',
+  sizes = '(min-width: 1152px) 17rem, (min-width: 1024px) 23vw, (min-width: 640px) 46vw, calc(100vw - 2rem)',
+  loading = 'lazy',
+} = Astro.props;
+const t = useTranslations(lang);
+const { title, subtitle, videos } = work.data;
+---
+
+<a href={localizePath(`/proyectos/${work.id}/`, lang)} class="group block h-full">
+  <div class="relative aspect-[4/3] overflow-hidden rounded-xl bg-surface ring-1 ring-border">
+    <Picture
+      src={coverOf(work)}
+      alt=""
+      widths={[400, 600, 800]}
+      sizes={sizes}
+      formats={['avif']}
+      fallbackFormat="webp"
+      loading={loading}
+      class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    {
+      videos.length > 0 && (
+        <span class="absolute right-3 bottom-3 grid size-10 place-items-center rounded-full bg-black/65 text-white backdrop-blur-sm">
+          <Icon name="play" class="size-4 translate-x-px" />
+          <span class="sr-only">{t('design.hasVideo')}</span>
+        </span>
+      )
+    }
+  </div>
+  <Heading class="mt-4 text-lg font-bold transition-colors group-hover:text-accent-strong">{title}</Heading>
+  <p class="mt-0.5 text-sm text-muted">{subtitle[lang]}</p>
+</a>

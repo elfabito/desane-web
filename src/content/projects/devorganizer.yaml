@@ -1,0 +1,17 @@
+title: DevOrganizer
+subtitle:
+  es: SaaS de planificación de proyectos con IA
+  en: AI project planning SaaS
+stack: [Python, Flask, Redis, Groq API, LLaMA 3.3 70B, Stripe, Cloudinary, OAuth 2.0]
+description:
+  es: SaaS que convierte una idea de proyecto en un plan de trabajo con IA generativa. Propone el stack, arma preguntas técnicas por categoría, divide las tareas y estima tiempos. Tiene login con Google, GitHub o email, suscripciones freemium con Stripe, notas diarias con imágenes, calendario y resúmenes semanales generados por IA. Las tareas se exportan a ClickUp y Linear. Son unas 6.000 líneas de Python en 8 servicios y 81 rutas HTTP.
+  en: SaaS that turns a project idea into a work plan using generative AI. It suggests the stack, drafts technical questions by category, breaks down tasks and estimates time. It has Google, GitHub or email login, freemium Stripe subscriptions, daily notes with images, a calendar and AI-generated weekly summaries. Tasks export to ClickUp and Linear. About 6,000 lines of Python across 8 services and 81 HTTP routes.
+image: ../../assets/desarrollo/devorganizer.png
+imageAlt:
+  es: Página de inicio de DevOrganizer, planificación de proyectos con IA para desarrolladores
+  en: DevOrganizer home page, AI-powered project planning for developers
+links:
+  demo: https://devorganizer.onrender.com/home
+  github: https://github.com/elfabito/DevOrganizer
+order: 4
+featured: true

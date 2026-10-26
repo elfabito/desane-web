@@ -1,0 +1,18 @@
+title: Clinic App
+subtitle:
+  es: Sistema de citas médicas con Django REST
+  en: Medical appointments with Django REST
+stack: [Python, Django 4.2, PostgreSQL, JavaScript, Bootstrap, Gunicorn, Vercel]
+description:
+  es: Sistema de citas médicas con arquitectura MVT y una API REST interna. Login por email con roles de paciente y médico, disponibilidad calculada según el día de la semana, restricción de reservas para el mismo día, flujo de aprobación y edición de perfil en línea. Configuración multientorno, archivos estáticos con WhiteNoise y despliegue en Vercel.
+  en: Medical appointment system with an MVT architecture and an internal REST API. Email login with patient and doctor roles, availability calculated by weekday, same-day booking restrictions, an approval flow and inline profile editing. Multi-environment config, static files with WhiteNoise and deployment on Vercel.
+image: ../../assets/desarrollo/clinic-app.png
+imageAlt:
+  es: Página de inicio de Clinic App, con la sección de terapia natural con kinesiología
+  en: Clinic App home page, with the natural kinesiology therapy section
+links:
+  demo: https://clinic-git-main-elfabitos-projects.vercel.app/
+  github: https://github.com/elfabito/clinic
+  youtube: https://youtu.be/U8ltz0aaTpE
+order: 7
+featured: false

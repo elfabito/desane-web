@@ -1,0 +1,106 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { isAnimated } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  images: CollectionEntry<'design-works'>['data']['images'];
+  lang: Lang;
+  /** When the gallery is the first thing below the page header */
+  eagerFirst?: boolean;
+  class?: string;
+}
+
+const { images, lang, eagerFirst = false, class: className } = Astro.props;
+const t = useTranslations(lang);
+
+// Every piece stays uncropped. Masonry columns only from four images up: with fewer, one tall
+// image makes the columns stack the rest together and leave a column empty.
+const thirds = '(min-width: 1152px) 22rem, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, calc(100vw - 2rem)';
+const layouts = {
+  single: {
+    list: 'max-w-4xl',
+    item: '',
+    link: '',
+    sizes: '(min-width: 928px) 56rem, calc(100vw - 2rem)',
+  },
+  double: {
+    list: 'grid items-start gap-5 sm:grid-cols-2',
+    item: '',
+    link: 'mx-auto',
+    sizes: '(min-width: 1152px) 34rem, (min-width: 640px) 46vw, calc(100vw - 2rem)',
+  },
+  triple: {
+    list: 'grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3',
+    item: '',
+    link: 'mx-auto',
+    sizes: thirds,
+  },
+  many: {
+    list: 'columns-1 gap-5 sm:columns-2 lg:columns-3',
+    item: 'mb-5 break-inside-avoid',
+    link: 'mx-auto',
+    sizes: thirds,
+  },
+};
+const layout = layouts[(['single', 'double', 'triple'] as const)[images.length - 1] ?? 'many'];
+
+const items = await Promise.all(
+  images.map(async ({ src, alt }) => ({
+    src,
+    alt: alt[lang],
+    animated: isAnimated(src),
+    large: isAnimated(src)
+      ? src.src
+      : (await getImage({ src, width: Math.min(src.width, 1600), format: 'webp' })).src,
+    widths: [...[400, 640, 800, 1100, 1600].filter((w) => w < src.width), src.width],
+  })),
+);
+---
+
+<ul class:list={[layout.list, className]}>
+  {
+    items.map(({ src, alt, animated, large, widths }, i) => {
+      const loading = eagerFirst && i === 0 ? 'eager' : 'lazy';
+      const imgClass =
+        'block h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]';
+      return (
+        <li class={layout.item}>
+          {/* Never wider than the file itself, so small originals are not blown up */}
+          <a
+            href={large}
+            data-lightbox="gallery"
+            data-alt={alt}
+            style={`width: min(100%, ${src.width}px)`}
+            class:list={['group block overflow-hidden rounded-xl bg-surface ring-1 ring-border', layout.link]}
+          >
+            {animated ? (
+              <img
+                src={src.src}
+                width={src.width}
+                height={src.height}
+                alt=""
+                loading={loading}
+                decoding="async"
+                class={imgClass}
+              />
+            ) : (
+              <Picture
+                src={src}
+                alt=""
+                widths={widths}
+                sizes={layout.sizes}
+                formats={['avif']}
+                fallbackFormat="webp"
+                loading={loading}
+                class={imgClass}
+              />
+            )}
+            <span class="sr-only">{t('project.enlarge', { alt })}</span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

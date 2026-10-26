@@ -1,0 +1,66 @@
+---
+import { Picture } from 'astro:assets';
+import ButtonLink from '../ui/ButtonLink.astro';
+import Icon from '../ui/Icon.astro';
+import { getProfile } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const profile = await getProfile();
+---
+
+<section id="sobre-mi" aria-labelledby="hero-title" class="container-page pb-16 md:pb-24">
+  <div class="grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14 lg:gap-20">
+    <div class="-mt-14 flex justify-center md:-mt-18 md:block md:self-start">
+      <div class="photo-frame w-60 rounded-[2rem] p-2.5 shadow-xl shadow-black/10 sm:w-72 md:w-full md:max-w-md">
+        <Picture
+          src={profile.photo}
+          alt={profile.photoAlt[lang]}
+          widths={[240, 384, 576, 800]}
+          sizes="(min-width: 768px) 28rem, 18rem"
+          formats={['avif']}
+          fallbackFormat="webp"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-square w-full rounded-[1.6rem] object-cover"
+        />
+      </div>
+    </div>
+
+    {/* Centered against the photo so neither column leaves a gap below it */}
+    <div class="md:self-center md:pt-14">
+      <h1 id="hero-title" class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+        {profile.name}
+      </h1>
+      <p class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-lg">
+        <span class="font-semibold text-accent-strong">{profile.role[lang]}</span>
+        <span class="hidden text-border sm:inline" aria-hidden="true">·</span>
+        <span class="inline-flex items-center gap-1.5 text-muted">
+          <Icon name="mapPin" class="size-[1.1em]" />
+          {profile.location}
+        </span>
+      </p>
+
+      <p class="mt-6 text-xl leading-relaxed text-pretty">
+        {profile.summary[lang]}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <ButtonLink href="#contacto" lang={lang} icon="mail">{t('hero.contact')}</ButtonLink>
+        <ButtonLink href="#desarrollo" lang={lang} variant="secondary">{t('hero.projects')}</ButtonLink>
+      </div>
+    </div>
+  </div>
+
+  {/* Full width below the photo, so no column is left empty */}
+  <div
+    class="mt-12 grid gap-x-12 gap-y-5 border-t border-border pt-10 leading-relaxed text-pretty text-muted md:mt-16 md:grid-cols-2 md:text-lg md:leading-relaxed"
+  >
+    {profile.about.map((paragraph) => <p>{paragraph[lang]}</p>)}
+  </div>
+</section>

@@ -1,0 +1,14 @@
+title: Farmacia Paris
+subtitle: { es: "Farmacia", en: "Pharmacy" }
+description:
+  es: "Animación 2D del logo de Farmacia Paris para Club Olimpia."
+  en: "2D logo animation for Farmacia Paris, made for Club Olimpia."
+services:
+  - { es: "Animación 2D", en: "2D animation" }
+  - { es: "After Effects", en: "After Effects" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/farmacia-paris/01-paris1.jpg
+    alt: { es: "Logo de Farmacias Paris", en: "Farmacias Paris logo" }
+videos: [m13x5Iz6loU]
+order: 6

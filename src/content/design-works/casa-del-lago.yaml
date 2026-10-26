@@ -1,0 +1,42 @@
+title: Iocean Interiorismo
+subtitle: { es: "Arquitectura e interiorismo", en: "Architecture and interior design" }
+description:
+  es: "Renders interiores y exteriores de una casa en el lago y su casa de huéspedes, junto a la arquitecta Patricia Escamez Bordy."
+  en: "Interior and exterior renders of a lake house and its guest house, made together with architect Patricia Escamez Bordy."
+services:
+  - { es: "Render exterior", en: "Exterior render" }
+  - { es: "Render interior", en: "Interior render" }
+  - { es: "Casa completa", en: "Full house" }
+categories: [diseno-3d]
+cover: ../../assets/proyectos/casa-del-lago/03-living-1.jpg
+images:
+  - src: ../../assets/proyectos/casa-del-lago/01-aerea-1.jpg
+    alt: { es: "Vista aérea en corte de la planta de la casa", en: "Cutaway aerial view of the house floor plan" }
+  - src: ../../assets/proyectos/casa-del-lago/02-aerea-2.jpg
+    alt: { es: "Segunda vista aérea en corte de la planta", en: "Second cutaway aerial view of the floor plan" }
+  - src: ../../assets/proyectos/casa-del-lago/03-living-1.jpg
+    alt: { es: "Render del living con ventanales y techo a dos aguas", en: "Render of the living room with large windows and a gabled ceiling" }
+  - src: ../../assets/proyectos/casa-del-lago/04-living-2.jpg
+    alt: { es: "Render del living y el comedor", en: "Render of the living and dining area" }
+  - src: ../../assets/proyectos/casa-del-lago/05-cuarto-1-1.jpg
+    alt: { es: "Render del dormitorio principal con iluminación cálida", en: "Render of the main bedroom with warm lighting" }
+  - src: ../../assets/proyectos/casa-del-lago/06-cuarto-2.jpg
+    alt: { es: "Render de un dormitorio con ventanal", en: "Render of a bedroom with a large window" }
+  - src: ../../assets/proyectos/casa-del-lago/07-afuera2.jpg
+    alt: { es: "Render exterior de la casa con fachada de piedra y jardín", en: "Exterior render of the house with a stone facade and garden" }
+  - src: ../../assets/proyectos/casa-del-lago/08-living15.png
+    alt: { es: "Render de un living con estufa a leña", en: "Render of a living room with a wood stove" }
+  - src: ../../assets/proyectos/casa-del-lago/09-cocina.png
+    alt: { es: "Render de una cocina con isla", en: "Render of a kitchen with an island" }
+  - src: ../../assets/proyectos/casa-del-lago/10-cocina-1.jpg
+    alt: { es: "Render de una cocina blanca con barra", en: "Render of a white kitchen with a breakfast bar" }
+  - src: ../../assets/proyectos/casa-del-lago/11-pasillo.jpg
+    alt: { es: "Render de un pasillo con escritorio junto a la ventana", en: "Render of a hallway with a desk by the window" }
+  - src: ../../assets/proyectos/casa-del-lago/12-bano-abajo.jpg
+    alt: { es: "Render de un baño con ducha y doble bacha", en: "Render of a bathroom with a shower and a double sink" }
+  - src: ../../assets/proyectos/casa-del-lago/13-dormitorio-2a.jpg
+    alt: { es: "Render de un dormitorio con vista al deck", en: "Render of a bedroom overlooking the deck" }
+  - src: ../../assets/proyectos/casa-del-lago/14-render-interior.jpg
+    alt: { es: "Render de una cocina integrada al comedor", en: "Render of a kitchen open to the dining area" }
+order: 1
+featured: true

@@ -1,0 +1,40 @@
+---
+import Icon from './ui/Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { getProfile } from '../lib/content';
+import { localizePath, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+// Compact sky band for inner pages: the home works as a CV, so it is the only link needed
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { name, role } = await getProfile();
+---
+
+<header class="sky">
+  <div class="container-page flex items-center justify-between gap-4 py-3 md:py-4">
+    <a href={localizePath('/', lang)} class="group inline-flex min-h-11 items-center gap-3">
+      <span
+        class="grid size-10 shrink-0 place-items-center rounded-full bg-chip text-text ring-1 ring-black/5 backdrop-blur-sm transition-colors group-hover:text-accent-strong dark:ring-white/10"
+        aria-hidden="true"
+      >
+        <Icon name="arrowLeft" class="size-5" />
+      </span>
+      <span class="leading-tight">
+        <span class="block font-display text-lg font-bold transition-colors group-hover:text-accent-strong">
+          {name}
+        </span>
+        <span class="hidden text-sm text-muted sm:block">{role[lang]}</span>
+      </span>
+      <span class="sr-only">, {t('header.home')}</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <ThemeToggle lang={lang} />
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
+</header>

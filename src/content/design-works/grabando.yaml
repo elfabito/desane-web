@@ -1,0 +1,15 @@
+title: Grabando Producciones
+subtitle: { es: "Film · Video", en: "Film · Video" }
+description:
+  es: "Productora que filma eventos de todo tipo. Diseño de sus flyers."
+  en: "Production company that films all kinds of events. Design of their flyers."
+services:
+  - { es: "Diseño de flyers", en: "Flyer design" }
+  - { es: "Folletos", en: "Brochures" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/grabando/01-mockup-clima-flyer1.jpg
+    alt: { es: "Mockup de flyer de Grabando Producciones con cámara y drone", en: "Grabando Producciones flyer mockup with a camera and a drone" }
+  - src: ../../assets/proyectos/grabando/02-uniquegraph-flyer-mockup.jpg
+    alt: { es: "Mockup de flyers de Grabando Producciones", en: "Grabando Producciones flyers mockup" }
+order: 9

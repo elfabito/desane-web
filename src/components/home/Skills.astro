@@ -1,0 +1,36 @@
+---
+import Chip from '../ui/Chip.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getProfile } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { skills } = await getProfile();
+---
+
+<section aria-labelledby="skills-title" class="bg-surface">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading id="skills-title" title={t('skills.title')} />
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skills.map(({ label, items }) => (
+          <li class="rounded-2xl bg-bg p-6 ring-1 ring-border" data-reveal>
+            <h3 class="text-sm font-bold tracking-[0.15em] text-accent-strong uppercase">{label[lang]}</h3>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {items.map((item) => (
+                <li>
+                  <Chip tone="surface">{typeof item === 'string' ? item : item[lang]}</Chip>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

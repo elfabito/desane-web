@@ -1,0 +1,66 @@
+---
+import Icon from './ui/Icon.astro';
+import { getProfile } from '../lib/content';
+import { localizePath, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { name, contact } = await getProfile();
+
+const whatsappUrl = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t('contact.whatsappMessage'))}`;
+
+const links = [
+  { label: t('footer.home'), href: localizePath('/', lang) },
+  { label: t('footer.projects'), href: localizePath('/proyectos/', lang) },
+];
+
+const socials = [
+  { icon: 'linkedin', label: 'LinkedIn', href: contact.linkedin },
+  { icon: 'github', label: 'GitHub', href: contact.github },
+  { icon: 'whatsapp', label: 'WhatsApp', href: whatsappUrl },
+] as const;
+---
+
+<footer class="border-t border-border bg-surface">
+  <div class="container-page flex flex-col items-center gap-6 py-10 md:flex-row md:justify-between">
+    <nav aria-label={t('footer.nav')}>
+      <ul class="flex gap-6 text-sm font-semibold tracking-[0.2em] uppercase">
+        {
+          links.map(({ label, href }) => (
+            <li>
+              <a href={href} class="text-accent-strong transition-colors hover:text-text">
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <ul class="flex gap-2" aria-label={t('footer.social')}>
+      {
+        socials.map(({ icon, label, href }) => (
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid size-11 place-items-center rounded-full text-accent-strong transition-colors hover:bg-sea-soft hover:text-text"
+            >
+              <Icon name={icon} class="size-6" />
+              <span class="sr-only">
+                {label} {t('a11y.newTab')}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="text-sm text-muted">© {new Date().getFullYear()} {name} · Desane</p>
+  </div>
+</footer>

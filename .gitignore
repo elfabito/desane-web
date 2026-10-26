@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+
+# Local working material (original assets and the old site), not used by the build
+_assets/
+_referencia/

@@ -1,0 +1,16 @@
+title: RegalBid
+subtitle:
+  es: App móvil de subastas en tiempo real
+  en: Real-time auction mobile app
+stack: [React Native, Expo, TypeScript, Supabase, PostgreSQL, Realtime, NativeWind, EAS Build]
+description:
+  es: App multiplataforma de subastas tipo penny auction para iOS, Android y web. Las pujas se actualizan en vivo por WebSockets, con lógica anti-sniping y una billetera de monedas virtuales con registro inmutable. La lógica crítica corre en funciones RPC de PostgreSQL para garantizar la integridad, con políticas RLS, compresión de imágenes y reversión automática de operaciones. Incluye panel de administración con registros de auditoría y 23 migraciones SQL.
+  en: Cross-platform penny auction app for iOS, Android and web. Bids update live over WebSockets, with anti-sniping logic and a virtual coin wallet backed by an immutable ledger. Critical business logic runs in PostgreSQL RPC functions to guarantee integrity, with RLS policies, image compression and automatic rollback. Includes an admin panel with audit logs and 23 SQL migrations.
+image: ../../assets/desarrollo/regalbid.png
+imageAlt:
+  es: Página de RegalBid con la app de subastas en un teléfono
+  en: RegalBid landing page showing the auction app on a phone
+links:
+  demo: https://project-qswbe.vercel.app/
+order: 3
+featured: true

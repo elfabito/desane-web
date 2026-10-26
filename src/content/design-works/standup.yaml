@@ -1,0 +1,12 @@
+title: Standup
+subtitle: { es: "Easton SRL", en: "Easton SRL" }
+description:
+  es: "Diseño de tarjeta personal."
+  en: "Business card design."
+services:
+  - { es: "Tarjeta personal", en: "Business card" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/standup/01-bcmockup-standup-1.jpg
+    alt: { es: "Mockup de tarjetas personales de Standup", en: "Standup business cards mockup" }
+order: 12

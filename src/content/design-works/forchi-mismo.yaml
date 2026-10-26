@@ -1,0 +1,14 @@
+title: Forchi Mismo
+subtitle: { es: "Fiesta de música electrónica", en: "Electronic music party" }
+description:
+  es: "Animación 2D para promocionar la fiesta."
+  en: "2D animation to promote the party."
+services:
+  - { es: "Animación 2D", en: "2D animation" }
+  - { es: "After Effects", en: "After Effects" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/forchi-mismo/01-a-e1462380100458.jpg
+    alt: { es: "Gráfica amarilla de la fiesta con el texto Forchi Mesmo 2.0", en: "Yellow party artwork with the text Forchi Mesmo 2.0" }
+videos: [pWHLI4IDkbg]
+order: 4

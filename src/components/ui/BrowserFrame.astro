@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** Text shown in the fake address bar */
+  label?: string;
+  class?: string;
+}
+
+const { label, class: className } = Astro.props;
+---
+
+<div class:list={['overflow-hidden rounded-xl bg-surface shadow-lg shadow-black/5 ring-1 ring-border', className]}>
+  <div class="flex items-center gap-1.5 border-b border-border bg-bg px-3 py-2.5" aria-hidden="true">
+    <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
+    <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
+    <span class="size-2.5 rounded-full bg-[#28c840]"></span>
+    {
+      label && (
+        <span class="mx-auto max-w-[70%] truncate rounded-md bg-surface px-3 py-0.5 text-xs text-muted ring-1 ring-border">
+          {label}
+        </span>
+      )
+    }
+  </div>
+  <slot />
+</div>

@@ -1,0 +1,179 @@
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/bricolage-grotesque';
+@import 'tailwindcss';
+
+/* For controls that only work with JS, e.g. `no-js:hidden` */
+@custom-variant no-js (html:not(.js) &);
+
+/* Dark follows the system unless the visitor picked a theme with the bulb (data-theme on <html>) */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme='light']), :root:not([data-theme='light']) *) {
+      @slot;
+    }
+  }
+  &:where([data-theme='dark'], [data-theme='dark'] *) {
+    @slot;
+  }
+}
+
+/* Semantic colors live in variables so dark mode only has to swap them */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --text: #14181b;
+  --muted: #4a5560;
+  --border: #dbe3e7;
+  --accent: #55aeca;
+  --accent-strong: #23718a;
+  --sea: #a8c8c5;
+  --sea-soft: #e4eeed;
+
+  --sky-top: #b6dfee;
+  --sky-bottom: #e8f5fa;
+  --cloud: rgb(255 255 255 / 0.9);
+  --cloud-soft: rgb(255 255 255 / 0.55);
+  --chip-bg: rgb(255 255 255 / 0.7);
+
+  color-scheme: light;
+
+  @variant dark {
+    --bg: #0e1418;
+    --surface: #151d22;
+    --text: #e8eef1;
+    --muted: #a3b1ba;
+    --border: #26323a;
+    --accent: #55aeca;
+    --accent-strong: #7cc6dd;
+    --sea: #2a4644;
+    --sea-soft: #16211f;
+
+    --sky-top: #0d2532;
+    --sky-bottom: #132e3b;
+    --cloud: rgb(255 255 255 / 0.08);
+    --cloud-soft: rgb(255 255 255 / 0.04);
+    --chip-bg: rgb(255 255 255 / 0.08);
+
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-sea: var(--sea);
+  --color-sea-soft: var(--sea-soft);
+  --color-chip: var(--chip-bg);
+
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Manrope Variable', ui-sans-serif, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--accent-strong);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  /* Keep the page still behind the lightbox */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Scroll reveal: only when JS runs and the visitor accepts motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(1.25rem);
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+    }
+
+    .js [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+
+    @media (width >= 40rem) {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 50;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 600;
+    transform: translateY(-200%);
+
+    &:focus-visible {
+      transform: none;
+    }
+  }
+
+  /* Two-tone frame from the old site: dark slate top-left, sky blue bottom-right */
+  .photo-frame {
+    background: linear-gradient(135deg, #3b5f70 50%, var(--accent) 50%);
+  }
+
+  .preview-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+  }
+
+  /* Soft sky: blurred cloud shapes over a gradient, no image request */
+  .sky {
+    background-color: var(--sky-bottom);
+    background-image:
+      radial-gradient(ellipse 30% 60% at 8% 35%, var(--cloud) 0%, transparent 70%),
+      radial-gradient(ellipse 22% 45% at 26% 85%, var(--cloud) 0%, transparent 70%),
+      radial-gradient(ellipse 26% 40% at 45% 15%, var(--cloud-soft) 0%, transparent 70%),
+      radial-gradient(ellipse 20% 35% at 62% 70%, var(--cloud-soft) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 55% at 92% 95%, var(--cloud-soft) 0%, transparent 70%),
+      linear-gradient(180deg, var(--sky-top), var(--sky-bottom));
+  }
+}

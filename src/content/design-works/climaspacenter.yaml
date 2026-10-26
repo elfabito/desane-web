@@ -1,0 +1,29 @@
+title: Clima Spa Center
+subtitle: { es: "Saunas y spas", en: "Saunas and spas" }
+description:
+  es: "Más de 25 años atendiendo hogares en climatización, calefacción, aire acondicionado, saunas y spas. Colaboramos con logo, gigantografía, folletos y tarjetas personales."
+  en: "Over 25 years serving homes with climate control, heating, air conditioning, saunas and spas. We worked on their logo, large-format signage, brochures and business cards."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Tarjetas personales", en: "Business cards" }
+  - { es: "A4", en: "A4" }
+  - { es: "Folletos", en: "Brochures" }
+  - { es: "Gigantografía", en: "Large-format sign" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/climaspacenter/01-mock-up-clima-flyer.jpg
+    alt: { es: "Mockup del flyer de Clima Spa Center con camillas de madera", en: "Clima Spa Center flyer mockup featuring wooden loungers" }
+  - src: ../../assets/proyectos/climaspacenter/02-clima-spa-1.jpg
+    alt: { es: "Logo de Clima Spa Center", en: "Clima Spa Center logo" }
+  - src: ../../assets/proyectos/climaspacenter/03-clima-spa-zona-de-seguridad-01-01.jpg
+    alt: { es: "Construcción del logo de Clima Spa Center sobre una grilla", en: "Clima Spa Center logo construction on a grid" }
+  - src: ../../assets/proyectos/climaspacenter/04-flyer-mockup-2-infinity-originalmockups2-1.jpg
+    alt: { es: "Mockup de folletos de saunas de Clima Spa Center", en: "Mockup of Clima Spa Center sauna brochures" }
+  - src: ../../assets/proyectos/climaspacenter/05-tarjetas-personales-final-01.jpg
+    alt: { es: "Tarjeta personal de Clima Spa Center", en: "Clima Spa Center business card" }
+  - src: ../../assets/proyectos/climaspacenter/06-clim-mock-up.jpg
+    alt: { es: "Mockup de papelería de Clima Spa Center", en: "Clima Spa Center stationery mockup" }
+  - src: ../../assets/proyectos/climaspacenter/07-img-86463.jpg
+    alt: { es: "Fachada del local de Clima Spa Center con la gigantografía instalada", en: "Clima Spa Center storefront with the large-format sign installed" }
+order: 11
+featured: true

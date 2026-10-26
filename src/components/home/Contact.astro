@@ -1,0 +1,35 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getProfile } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { contact } = await getProfile();
+const whatsappUrl = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t('contact.whatsappMessage'))}`;
+---
+
+<section id="contacto" aria-labelledby="contact-title" class="bg-sea-soft">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading id="contact-title" title={t('contact.title')} intro={t('contact.intro')} align="center" />
+    <ul class="flex flex-wrap justify-center gap-3" data-reveal>
+      <li>
+        <ButtonLink href={`mailto:${contact.email}`} lang={lang} icon="mail">{contact.email}</ButtonLink>
+      </li>
+      <li>
+        <ButtonLink href={whatsappUrl} lang={lang} icon="whatsapp" variant="secondary" external>WhatsApp</ButtonLink>
+      </li>
+      <li>
+        <ButtonLink href={contact.linkedin} lang={lang} icon="linkedin" variant="secondary" external>LinkedIn</ButtonLink>
+      </li>
+      <li>
+        <ButtonLink href={contact.github} lang={lang} icon="github" variant="secondary" external>GitHub</ButtonLink>
+      </li>
+    </ul>
+  </div>
+</section>

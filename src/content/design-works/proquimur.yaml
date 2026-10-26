@@ -1,0 +1,14 @@
+title: Proquimur
+subtitle: { es: "Almacén rural", en: "Rural supply store" }
+description:
+  es: "Edición de video y animaciones 2D de los productos."
+  en: "Video editing and 2D animations of their products."
+services:
+  - { es: "Edición de video", en: "Video editing" }
+  - { es: "Animación 2D", en: "2D animation" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/proquimur/01-logo-proquimur-23.jpg
+    alt: { es: "Logo de Proquimur", en: "Proquimur logo" }
+videos: [VvxFHCDCL74, YI3yBw5os70]
+order: 7

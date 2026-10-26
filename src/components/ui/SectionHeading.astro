@@ -1,0 +1,30 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  /** Short label above the title, e.g. to tell custom code apart from no-code work */
+  eyebrow?: string;
+  intro?: string;
+  align?: 'start' | 'center';
+}
+
+const { id, title, eyebrow, intro, align = 'start' } = Astro.props;
+---
+
+<div class:list={['mb-10 max-w-2xl md:mb-14', align === 'center' && 'mx-auto text-center']} data-reveal>
+  {
+    eyebrow && (
+      <p class="mb-3 inline-flex rounded-full bg-sea-soft px-3 py-1 text-xs font-bold tracking-[0.15em] text-accent-strong uppercase ring-1 ring-border">
+        {eyebrow}
+      </p>
+    )
+  }
+  <h2 id={id} class="text-3xl font-bold tracking-tight md:text-4xl">
+    {title}
+  </h2>
+  <span
+    class:list={['mt-4 block h-1 w-14 rounded-full bg-accent', align === 'center' && 'mx-auto']}
+    aria-hidden="true"></span>
+  {intro && <p class="mt-5 text-lg text-muted">{intro}</p>}
+  <slot />
+</div>

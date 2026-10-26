@@ -1,0 +1,75 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+// A light bulb: lit in light mode, off in dark mode. Without JS it is hidden and the
+// page simply follows the system setting.
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  data-turn-on={t('theme.turnOn')}
+  data-turn-off={t('theme.turnOff')}
+  aria-pressed="false"
+  class="grid size-11 shrink-0 place-items-center rounded-full bg-chip text-text ring-1 ring-black/5 backdrop-blur-sm transition-colors no-js:hidden hover:text-accent-strong dark:ring-white/10"
+>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="size-6 origin-bottom drop-shadow-[0_0_6px_rgb(251_191_36/0.75)] transition duration-300 dark:drop-shadow-none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"
+      class="origin-center stroke-amber-500 transition duration-300 dark:scale-50 dark:opacity-0"></path>
+    <path
+      d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"
+      class="fill-amber-300 transition duration-300 dark:fill-transparent"></path>
+    <path d="M9.7 17l4.6 0"></path>
+  </svg>
+  <span class="sr-only">{t('theme.dark')}</span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const systemDark = matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (root.dataset.theme ?? (systemDark.matches ? 'dark' : 'light')) === 'dark';
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]')) {
+    const sync = () => {
+      button.setAttribute('aria-pressed', String(isDark()));
+      button.title = (isDark() ? button.dataset.turnOn : button.dataset.turnOff) ?? '';
+    };
+    sync();
+    // Until the visitor picks a theme, the page keeps following the system
+    systemDark.addEventListener('change', sync);
+
+    button.addEventListener('click', () => {
+      const theme = isDark() ? 'light' : 'dark';
+      root.dataset.theme = theme;
+      try {
+        localStorage.setItem('theme', theme);
+      } catch {
+        // Private mode or blocked storage: the choice just lasts until the page is left
+      }
+      sync();
+      if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        button.querySelector('svg')?.animate(
+          [{ rotate: '0deg' }, { rotate: '-14deg' }, { rotate: '10deg' }, { rotate: '-5deg' }, { rotate: '0deg' }],
+          { duration: 600, easing: 'ease-in-out' },
+        );
+      }
+    });
+  }
+</script>

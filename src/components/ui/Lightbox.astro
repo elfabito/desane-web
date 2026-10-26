@@ -1,0 +1,108 @@
+---
+import Icon from './Icon.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+// One shared viewer: any <a data-lightbox="group" href="large.jpg" data-alt data-caption> opens here.
+// Without JS the link simply opens the image.
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const button =
+  'absolute grid size-12 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25 focus-visible:outline-white';
+---
+
+<dialog
+  data-lightbox-dialog
+  aria-label={t('lightbox.label')}
+  class="m-0 h-dvh max-h-none w-screen max-w-none border-0 bg-[rgb(8_12_15/0.94)] p-0 backdrop:bg-transparent"
+>
+  <button data-lb-close type="button" class:list={[button, 'top-3 right-3 z-10']}>
+    <Icon name="close" class="size-6" />
+    <span class="sr-only">{t('lightbox.close')}</span>
+  </button>
+  <div data-lb-stage class="flex size-full flex-col items-center justify-center gap-3 px-4 py-16 md:px-20">
+    <figure class="flex max-h-full flex-col items-center gap-3">
+      <img alt="" class="max-h-[78dvh] w-auto max-w-full rounded-lg object-contain shadow-2xl" />
+      <figcaption data-lb-caption class="max-w-prose text-center text-sm text-white/85"></figcaption>
+    </figure>
+    <p data-lb-counter class="text-xs text-white/70 tabular-nums" aria-live="polite"></p>
+  </div>
+  <button data-lb-prev type="button" class:list={[button, 'top-1/2 left-3 -translate-y-1/2']}>
+    <Icon name="chevronLeft" class="size-6" />
+    <span class="sr-only">{t('lightbox.prev')}</span>
+  </button>
+  <button data-lb-next type="button" class:list={[button, 'top-1/2 right-3 -translate-y-1/2']}>
+    <Icon name="chevronRight" class="size-6" />
+    <span class="sr-only">{t('lightbox.next')}</span>
+  </button>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
+
+  if (dialog) {
+    const img = dialog.querySelector('img')!;
+    const stage = dialog.querySelector<HTMLElement>('[data-lb-stage]')!;
+    const caption = dialog.querySelector<HTMLElement>('[data-lb-caption]')!;
+    const counter = dialog.querySelector<HTMLElement>('[data-lb-counter]')!;
+    const prev = dialog.querySelector<HTMLButtonElement>('[data-lb-prev]')!;
+    const next = dialog.querySelector<HTMLButtonElement>('[data-lb-next]')!;
+    let items: HTMLAnchorElement[] = [];
+    let index = 0;
+    let opener: HTMLAnchorElement | null = null;
+
+    const show = (i: number) => {
+      index = (i + items.length) % items.length;
+      const item = items[index];
+      img.src = item.href;
+      img.alt = item.dataset.alt ?? '';
+      caption.textContent = item.dataset.caption ?? '';
+      caption.hidden = !item.dataset.caption;
+      counter.textContent = items.length > 1 ? `${index + 1} / ${items.length}` : '';
+      prev.hidden = next.hidden = items.length < 2;
+    };
+
+    document.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const trigger = (event.target as Element).closest<HTMLAnchorElement>('a[data-lightbox]');
+      if (!trigger) return;
+      event.preventDefault();
+      // Only images that are currently on screen, so filtered-out items are skipped
+      items = [
+        ...document.querySelectorAll<HTMLAnchorElement>(`a[data-lightbox="${trigger.dataset.lightbox}"]`),
+      ].filter((a) => a === trigger || a.offsetParent !== null);
+      opener = trigger;
+      show(items.indexOf(trigger));
+      dialog.showModal();
+    });
+
+    prev.addEventListener('click', () => show(index - 1));
+    next.addEventListener('click', () => show(index + 1));
+    dialog.querySelector('[data-lb-close]')!.addEventListener('click', () => dialog.close());
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+
+    // Clicking the dark area around the image closes the viewer
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog || event.target === stage) dialog.close();
+    });
+
+    let touchX = 0;
+    dialog.addEventListener('touchstart', (event) => (touchX = event.touches[0].clientX), { passive: true });
+    dialog.addEventListener('touchend', (event) => {
+      const delta = event.changedTouches[0].clientX - touchX;
+      if (Math.abs(delta) > 50 && items.length > 1) show(index + (delta < 0 ? 1 : -1));
+    });
+
+    dialog.addEventListener('close', () => {
+      img.removeAttribute('src');
+      opener?.focus();
+    });
+  }
+</script>

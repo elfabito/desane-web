@@ -1,0 +1,20 @@
+title: Petrushky
+subtitle: { es: "Pizzería en Maldonado", en: "Pizzeria in Maldonado" }
+description:
+  es: "Diseño de logo, flyers y piezas para redes."
+  en: "Logo, flyers and social media pieces."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Flyer", en: "Flyer" }
+  - { es: "Redes sociales", en: "Social media" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/petrushky/01-logo-petrushks-1-2.jpg
+    alt: { es: "Logo de Petrushki Pizzería", en: "Petrushki Pizzería logo" }
+  - src: ../../assets/proyectos/petrushky/02-mockup-44-1.jpg
+    alt: { es: "Mockup del flyer de Petrushki con promociones", en: "Mockup of the Petrushki flyer with promotions" }
+  - src: ../../assets/proyectos/petrushky/03-posteo-face-11-1.jpg
+    alt: { es: "Posteo para redes de Petrushki que anuncia el delivery", en: "Petrushki social media post announcing delivery" }
+  - src: ../../assets/proyectos/petrushky/04-folleto-10-10-1.jpg
+    alt: { es: "Folleto de Petrushki con menú y precios", en: "Petrushki flyer with menu and prices" }
+order: 10

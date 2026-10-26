@@ -1,0 +1,12 @@
+title: Vento Neckwear
+subtitle: { es: "Cuelleras", en: "Neck gaiters" }
+description:
+  es: "Proyecto dedicado a cuelleras de tela algodonada, licra y polar."
+  en: "Brand of neck gaiters made of cotton blend, lycra and fleece."
+services:
+  - { es: "Logo", en: "Logo" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/vento/01-rgb-04.jpg
+    alt: { es: "Logo de Vento Neckwear", en: "Vento Neckwear logo" }
+order: 18

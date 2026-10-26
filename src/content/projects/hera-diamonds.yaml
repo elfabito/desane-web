@@ -1,0 +1,16 @@
+title: Hera Diamonds
+subtitle:
+  es: Plataforma mayorista B2B de diamantes
+  en: B2B wholesale diamond platform
+stack: [React 19, Next.js 16, TypeScript, Supabase, PostgreSQL, Tailwind CSS v4, Mercado Pago, Resend, Cloudflare Workers]
+description:
+  es: Plataforma mayorista para joyeros con catálogo sincronizado desde la API del proveedor y stock verificado en tiempo real. El carrito reserva stock, los pagos van por Mercado Pago Checkout Pro con webhooks firmados y los pedidos impagos se cancelan solos. Incluye motor de márgenes configurable, visor de gemas en 360°, roles con seguridad a nivel de fila (RLS), panel de administración con analíticas y widgets de catálogo para integrar en otros sitios. Corre en Cloudflare Workers, con 37 migraciones SQL y sincronización programada.
+  en: Wholesale platform for jewelers, with a catalog synced from the supplier's API and real-time stock checks. The cart reserves stock, payments run through Mercado Pago Checkout Pro with signed webhooks, and unpaid orders cancel automatically. It includes a configurable margin engine, a 360° gem viewer, row-level security (RLS) roles, an admin dashboard with analytics and embeddable catalog widgets. Runs on Cloudflare Workers, with 37 SQL migrations and scheduled syncing.
+image: ../../assets/desarrollo/hera-diamonds.png
+imageAlt:
+  es: Página de inicio de Hera Diamonds, con el mensaje para joyeros y las certificaciones GIA e IGI
+  en: Hera Diamonds home page, with the message for jewelers and the GIA and IGI certifications
+links:
+  demo: https://hhdiamonds.com
+order: 1
+featured: true

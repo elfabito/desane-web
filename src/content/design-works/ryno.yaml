@@ -1,0 +1,13 @@
+title: Ryno
+subtitle: { es: "Herramientas", en: "Tools" }
+description:
+  es: "Diseño gráfico para una línea de discos y accesorios de amoladora."
+  en: "Graphic design for a line of angle grinder discs and accessories."
+services:
+  - { es: "Diseño de producto", en: "Product design" }
+  - { es: "Packaging", en: "Packaging" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/ryno/01-mockup-disco2.jpg
+    alt: { es: "Mockup del diseño de un disco de amoladora de la línea Rynos", en: "Mockup of an angle grinder disc design from the Rynos line" }
+order: 14

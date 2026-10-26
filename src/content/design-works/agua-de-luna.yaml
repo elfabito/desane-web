@@ -1,0 +1,16 @@
+title: Cabañas Agua de Luna
+subtitle: { es: "Alquiler de cabañas", en: "Cabin rentals" }
+description:
+  es: "Alquiler de cabañas en La Paloma, Rocha."
+  en: "Cabin rentals in La Paloma, Rocha."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Afiche", en: "Poster" }
+  - { es: "Carta de bienvenida para huéspedes", en: "Guest welcome letter" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/agua-de-luna/01-logo-cabanas-agua-de-luna.jpg
+    alt: { es: "Logo de Cabañas Agua de Luna", en: "Cabañas Agua de Luna logo" }
+  - src: ../../assets/proyectos/agua-de-luna/02-folletito-cabanas.jpg
+    alt: { es: "Mockup del folleto para huéspedes de Cabañas Agua de Luna", en: "Mockup of the guest brochure for Cabañas Agua de Luna" }
+order: 20

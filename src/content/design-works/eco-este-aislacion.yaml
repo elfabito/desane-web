@@ -1,0 +1,18 @@
+title: Eco Este Aislación
+subtitle: { es: "Aislamiento ecológico", en: "Eco-friendly insulation" }
+description:
+  es: "El aislante ecológico por excelencia."
+  en: "The eco-friendly insulation of choice."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Afiche", en: "Poster" }
+  - { es: "Tarjeta personal", en: "Business card" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/eco-este-aislacion/01-ecoesteaislacion-afiche.jpg
+    alt: { es: "Mockup del afiche de Eco Este Aislación sobre la aislación con celulosa", en: "Mockup of the Eco Este Aislación poster about cellulose insulation" }
+  - src: ../../assets/proyectos/eco-este-aislacion/02-ecoesteaislacion-tarjeta-personal.jpg
+    alt: { es: "Tarjeta personal de Eco Este Aislación en una mano", en: "Eco Este Aislación business card held in a hand" }
+  - src: ../../assets/proyectos/eco-este-aislacion/03-ecoesteaislacion-tarjeta-personal-2.jpg
+    alt: { es: "Mockup de tarjetas personales de Eco Este Aislación", en: "Eco Este Aislación business cards mockup" }
+order: 21

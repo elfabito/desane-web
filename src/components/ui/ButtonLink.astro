@@ -1,0 +1,43 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  href: string;
+  lang: Lang;
+  variant?: 'primary' | 'secondary';
+  icon?: IconName;
+  /** Shows the icon after the label, for forward arrows */
+  iconAfter?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  lang,
+  variant = 'primary',
+  icon,
+  iconAfter = false,
+  external = false,
+  class: className,
+} = Astro.props;
+const t = useTranslations(lang);
+---
+
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+  class:list={[
+    'inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold transition-colors',
+    variant === 'primary' && 'bg-accent-strong text-bg hover:bg-text',
+    variant === 'secondary' && 'bg-surface text-text ring-1 ring-border hover:ring-accent-strong hover:text-accent-strong',
+    className,
+  ]}
+>
+  {icon && !iconAfter && <Icon name={icon} class="size-5 shrink-0" />}
+  <slot />
+  {icon && iconAfter && <Icon name={icon} class="size-5 shrink-0" />}
+  {external && <span class="sr-only">{t('a11y.newTab')}</span>}
+</a>

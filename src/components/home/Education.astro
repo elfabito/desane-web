@@ -1,0 +1,52 @@
+---
+import CertificateGrid from './CertificateGrid.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getCertificates, getProfile } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { education } = await getProfile();
+const certificateCount = (await getCertificates()).length;
+---
+
+<section aria-labelledby="education-title">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading id="education-title" title={t('education.title')} />
+    <div class="max-w-3xl space-y-4 text-lg leading-relaxed text-pretty text-muted" data-reveal>
+      {education.map((paragraph) => <p>{paragraph[lang]}</p>)}
+    </div>
+
+    {/* Closed by default: thirteen cards take a lot of room on a CV-style page */}
+    <details class="group mt-12 rounded-2xl bg-surface ring-1 ring-border" data-reveal>
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 md:p-6 [&::-webkit-details-marker]:hidden"
+      >
+        <span>
+          <h3 class="text-xl font-bold tracking-tight">{t('education.certificates')}</h3>
+          <span class="mt-0.5 block text-sm text-muted">
+            {t('education.count', { count: String(certificateCount) })}
+          </span>
+        </span>
+        <span class="flex shrink-0 items-center gap-3 text-sm font-semibold text-accent-strong">
+          <span class="group-open:hidden">{t('education.show')}</span>
+          <span class="hidden group-open:inline">{t('education.hide')}</span>
+          <span
+            class="grid size-10 place-items-center rounded-full bg-sea-soft transition-transform duration-300 group-open:rotate-180"
+            aria-hidden="true"
+          >
+            <Icon name="chevronDown" class="size-5" />
+          </span>
+        </span>
+      </summary>
+      <div class="border-t border-border p-5 md:p-6">
+        <CertificateGrid lang={lang} />
+      </div>
+    </details>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+title: Clases de Alemán
+subtitle: { es: "Clases particulares", en: "Private lessons" }
+description:
+  es: "Tarjeta personal para clases particulares de alemán."
+  en: "Business card for private German lessons."
+services:
+  - { es: "Tarjeta personal", en: "Business card" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/clases-aleman/01-tj-aleman.jpg
+    alt: { es: "Tarjeta personal para clases particulares de alemán", en: "Business card for private German lessons" }
+order: 13

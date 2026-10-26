@@ -1,0 +1,34 @@
+---
+import { langs, languages, translatePath, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<nav aria-label={t('lang.nav')}>
+  <ul class="flex rounded-full bg-chip p-1 text-xs font-bold tracking-wider ring-1 ring-black/5 backdrop-blur-sm dark:ring-white/10">
+    {
+      langs.map((code) => (
+        <li>
+          <a
+            href={translatePath(Astro.url.pathname, code)}
+            hreflang={code}
+            lang={code}
+            aria-current={code === lang ? 'true' : undefined}
+            class:list={[
+              'grid min-h-9 min-w-11 place-items-center rounded-full px-3 transition-colors',
+              code === lang ? 'bg-text text-bg' : 'text-text hover:text-accent-strong',
+            ]}
+          >
+            <span aria-hidden="true">{code.toUpperCase()}</span>
+            <span class="sr-only">{languages[code]}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

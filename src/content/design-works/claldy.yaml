@@ -1,0 +1,18 @@
+title: Claldy
+subtitle: { es: "Productos lácteos", en: "Dairy products" }
+description:
+  es: "GIFs para la marca y animación de intro para sus videos, junto a Easton SRL."
+  en: "GIFs for the brand and an intro animation for its videos, together with Easton SRL."
+services:
+  - { es: "Diseño de GIFs", en: "GIF design" }
+  - { es: "Animación 2D", en: "2D animation" }
+  - { es: "Intro de video", en: "Video intro" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/claldy/01-file-546c7db00aw.jpg
+    alt: { es: "Logo de Claldy Natural", en: "Claldy Natural logo" }
+  - src: ../../assets/proyectos/claldy/02-claldy.gif
+    alt: { es: "Banner animado de Claldy con un paisaje de campo", en: "Animated Claldy banner with a countryside landscape" }
+  - src: ../../assets/proyectos/claldy/03-claldy-mas-fruta-4.gif
+    alt: { es: "GIF animado del Bioyogur Claldy, ahora con más fruta", en: "Animated Claldy Bioyogur GIF, now with more fruit" }
+order: 8

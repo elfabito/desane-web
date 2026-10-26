@@ -1,0 +1,18 @@
+title: Laquimex
+subtitle: { es: "Productos químicos", en: "Chemical products" }
+description:
+  es: "Rediseño de la papelería institucional."
+  en: "Redesign of the company stationery."
+services:
+  - { es: "Tarjetas personales", en: "Business cards" }
+  - { es: "Sobre", en: "Envelope" }
+  - { es: "Hoja A4", en: "A4 letterhead" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/laquimex/01-laquimex-tarjetas-personales.jpg
+    alt: { es: "Mockup de tarjetas personales de Laquimex en su caja", en: "Mockup of Laquimex business cards in their box" }
+  - src: ../../assets/proyectos/laquimex/02-mockup-sobre-tarjeta-personal-laquimex.jpg
+    alt: { es: "Mockup de sobre y tarjetas personales de Laquimex", en: "Mockup of a Laquimex envelope and business cards" }
+  - src: ../../assets/proyectos/laquimex/03-a4-presentation.jpg
+    alt: { es: "Mockup de hoja A4 membretada de Laquimex", en: "Mockup of Laquimex A4 letterhead" }
+order: 2

@@ -1,0 +1,18 @@
+title: Veterinaria App
+subtitle:
+  es: Gestión veterinaria con Django
+  en: Veterinary management with Django
+stack: [Python, Django 4.2, PostgreSQL, Stripe, PayPal, Google Calendar API, Twilio, Vercel]
+description:
+  es: Plataforma para una veterinaria con reserva de turnos sincronizada con Google Calendar, tienda con carrito y pagos con Stripe o PayPal. Tiene login personalizado con DNI, panel de administración de usuarios, productos y proveedores, reportes en PDF automáticos y avisos por SMS con Twilio. Desplegada como serverless en Vercel.
+  en: Platform for a veterinary clinic with appointment booking synced to Google Calendar, a shop with a cart and payments through Stripe or PayPal. It has custom ID-based login, admin panels for users, products and suppliers, automated PDF reports and SMS notifications with Twilio. Deployed serverless on Vercel.
+image: ../../assets/desarrollo/veterinaria-app.png
+imageAlt:
+  es: Página de inicio de la app veterinaria, con el servicio de paseo de mascotas
+  en: Veterinary app home page, featuring the pet walking service
+links:
+  demo: https://veterinaria-git-main-elfabitos-projects.vercel.app/
+  github: https://github.com/elfabito/veterinaria-app
+  youtube: https://youtu.be/s6cp0j-60Sc
+order: 6
+featured: false

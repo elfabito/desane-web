@@ -1,0 +1,13 @@
+title: Música Rodante
+subtitle: { es: "Música y viaje", en: "Music and travel" }
+description:
+  es: "Proyecto dedicado al viaje y la música."
+  en: "Project about travel and music."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Tarjeta de presentación", en: "Business card" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/musica-rodante/01-musica-rodante.jpg
+    alt: { es: "Logo de Música Rodante sobre una ruta", en: "Música Rodante logo over a road" }
+order: 17

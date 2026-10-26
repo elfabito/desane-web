@@ -1,0 +1,16 @@
+title: ClearView
+subtitle:
+  es: Emparejamiento de consultores con IA
+  en: AI-powered consultant matching
+stack: [React 18, TypeScript, Node.js, Express, PostgreSQL, OpenAI GPT-4o, Zod, TanStack Query, shadcn/ui, Tailwind CSS]
+description:
+  es: SaaS que conecta consultores con oportunidades laborales mediante IA. Analiza currículums y descripciones de puestos con GPT-4o y devuelve un puntaje de compatibilidad con su explicación. Incluye roles con OpenID Connect, lectura de PDF y Word, mensajería, panel de analíticas para administradores y caché por hash de entrada para reducir llamadas a la IA. Suma protección CSRF, límite de peticiones y almacenamiento en la nube.
+  en: SaaS that matches consultants with job opportunities using AI. It analyzes resumes and job descriptions with GPT-4o and returns a compatibility score with an explanation. It includes role-based access with OpenID Connect, PDF and Word parsing, messaging, an admin analytics dashboard and input-hash caching to cut AI calls. It also adds CSRF protection, rate limiting and cloud storage.
+image: ../../assets/desarrollo/clearview.png
+imageAlt:
+  es: Página de inicio de ClearView con un panel de puntajes de análisis
+  en: ClearView home page with a scoring dashboard
+links:
+  demo: https://useclearview.com/
+order: 5
+featured: true

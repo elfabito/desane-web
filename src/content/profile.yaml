@@ -1,0 +1,92 @@
+fabian:
+  name: Fabián Martínez
+  fullName: Fabián Martínez Machado
+  role:
+    es: Desarrollador Full-Stack
+    en: Full-Stack Developer
+  location: Maldonado, Uruguay
+  photo: ../assets/perfil/fmm.webp
+  photoAlt:
+    es: Retrato de Fabián Martínez
+    en: Portrait of Fabián Martínez
+  contact:
+    email: elfabito@gmail.com
+    phone: "+598 99 817 157"
+    whatsapp: "59899817157"
+    linkedin: https://www.linkedin.com/in/fabian-martinez-developer/
+    github: https://github.com/elfabito
+
+  summary:
+    es: Diseño, desarrollo y pongo en producción aplicaciones web y móviles, de la interfaz a la base de datos. Más de 9 años creando productos digitales, con la mirada de alguien que viene del diseño gráfico.
+    en: I design, build and ship web and mobile apps, from the interface to the database. Over 9 years creating digital products, with the eye of someone who comes from graphic design.
+
+  about:
+    - es: En el frontend trabajo con React, Next.js y React Native. En el backend, con Python (Django y Flask), Node.js, PostgreSQL y Supabase. Despliego en plataformas como Vercel y Cloudflare.
+      en: On the frontend I work with React, Next.js and React Native. On the backend, with Python (Django and Flask), Node.js, PostgreSQL and Supabase. I deploy on platforms like Vercel and Cloudflare.
+    - es: Desarrollé plataformas SaaS con IA, sistemas en tiempo real, pagos, autenticación segura, paneles de administración, reportes y flujos automatizados, incluidas arquitecturas alineadas con HIPAA.
+      en: I have built AI-powered SaaS platforms, real-time systems, payments, secure authentication, admin dashboards, reporting tools and automated workflows, including HIPAA-aligned architectures.
+    - es: Mi base en diseño gráfico es mi diferencial. Pienso cada pantalla como una pieza de diseño, con jerarquía clara, buena tipografía y foco en quien la usa.
+      en: My graphic design background is what sets me apart. I treat every screen as a design piece, with clear hierarchy, good typography and a focus on the people using it.
+    - es: Trabajo de forma independiente o en equipos ágiles, con arquitectura limpia, código mantenible, seguridad y comunicación clara.
+      en: I work independently or in agile teams, with clean architecture, maintainable code, security and clear communication.
+
+  values:
+    - icon: strategy
+      title:
+        es: Estrategia
+        en: Strategy
+      text:
+        es: Pienso los productos de punta a punta, de la idea al despliegue. Busco sumar esa visión en equipos colaborativos, técnicos y con ganas de innovar.
+        en: I think about products end to end, from the idea to deployment. I want to bring that view to collaborative, technical teams that care about innovation.
+    - icon: professionalism
+      title:
+        es: Profesionalismo
+        en: Professionalism
+      text:
+        es: Años de trabajo freelance me dieron autonomía, responsabilidad y foco en resultados. Entrego soluciones escalables, seguras y bien terminadas.
+        en: Years of freelance work gave me autonomy, ownership and a focus on results. I deliver scalable, secure and well-finished solutions.
+    - icon: creativity
+      title:
+        es: Creatividad
+        en: Creativity
+      text:
+        es: Resuelvo problemas complejos combinando pensamiento analítico y diseño, para construir experiencias útiles, modernas y fáciles de usar.
+        en: I solve complex problems by combining analytical thinking with design, to build experiences that are useful, modern and easy to use.
+
+  skills:
+    - label:
+        es: Frontend
+        en: Frontend
+      items: [React, Next.js, React Native, TypeScript, Tailwind CSS, HTML/CSS]
+    - label:
+        es: Backend
+        en: Backend
+      items: [Python, Django, Flask, Node.js, REST APIs]
+    - label:
+        es: Datos e infraestructura
+        en: Database & Infra
+      items: [PostgreSQL, Supabase, Docker, Vercel, Cloudflare, AWS, Azure]
+    - label:
+        es: IA y automatización
+        en: AI & Automation
+      items:
+        - es: Integración de APIs de IA
+          en: AI API integrations
+        - n8n
+        - Claude Code
+    - label:
+        es: Diseño
+        en: Design
+      items: [Photoshop, Illustrator, After Effects, 3ds Max]
+
+  noCodePlatforms: [WordPress, Bubble, Replit, Lovable, Webflow]
+
+  education:
+    - es: Empecé como freelance en diseño gráfico, 3D y WordPress, y de ahí pasé de lleno al desarrollo de software.
+      en: I started as a freelancer in graphic design, 3D and WordPress, and from there moved fully into software development.
+    - es: Completé CS50 Web Programming with Python and JavaScript de Harvard, donde desarrollé seis proyectos desde cero, entre ellos una red social y un e-commerce.
+      en: I completed Harvard's CS50 Web Programming with Python and JavaScript, building six projects from scratch, including a social network and an e-commerce platform.
+    - es: Después profundicé en Python (Flask, Pandas e integración de APIs) e hice un bootcamp de JavaScript y React que simulaba un entorno laboral real.
+      en: I then went deeper into Python (Flask, Pandas and API integration) and took a JavaScript and React bootcamp that simulated a real work environment.
+    - es: Sigo aprendiendo de forma constante, y mis proyectos están documentados en GitHub.
+      en: I keep learning constantly, and my projects are documented on GitHub.

@@ -1,0 +1,53 @@
+---
+import ClientSiteCard from './ClientSiteCard.astro';
+import Chip from '../ui/Chip.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getClientSites, getProfile } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const sites = await getClientSites();
+const { noCodePlatforms } = await getProfile();
+---
+
+<section aria-labelledby="clients-title" class="bg-sea-soft">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading
+      id="clients-title"
+      eyebrow={t('clients.eyebrow')}
+      title={t('clients.title')}
+      intro={t('clients.intro')}
+    >
+      {
+        noCodePlatforms.length > 0 && (
+          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span class="text-sm font-bold tracking-[0.15em] text-accent-strong uppercase">
+              {t('clients.platforms')}
+            </span>
+            <ul class="flex flex-wrap gap-2">
+              {noCodePlatforms.map((platform) => (
+                <li>
+                  <Chip tone="surface">{platform}</Chip>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </SectionHeading>
+    <ul class="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      {
+        sites.map((site) => (
+          <li>
+            <ClientSiteCard site={site} lang={lang} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

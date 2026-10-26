@@ -1,0 +1,60 @@
+---
+import linkedin from '@tabler/icons/filled/brand-linkedin.svg?raw';
+import github from '@tabler/icons/filled/brand-github.svg?raw';
+import whatsapp from '@tabler/icons/outline/brand-whatsapp.svg?raw';
+import youtube from '@tabler/icons/filled/brand-youtube.svg?raw';
+import mail from '@tabler/icons/outline/mail.svg?raw';
+import phone from '@tabler/icons/outline/phone.svg?raw';
+import external from '@tabler/icons/outline/external-link.svg?raw';
+import play from '@tabler/icons/filled/player-play.svg?raw';
+import arrowLeft from '@tabler/icons/outline/arrow-left.svg?raw';
+import arrowRight from '@tabler/icons/outline/arrow-right.svg?raw';
+import arrowUp from '@tabler/icons/outline/arrow-up.svg?raw';
+import chevronLeft from '@tabler/icons/outline/chevron-left.svg?raw';
+import chevronRight from '@tabler/icons/outline/chevron-right.svg?raw';
+import chevronDown from '@tabler/icons/outline/chevron-down.svg?raw';
+import close from '@tabler/icons/outline/x.svg?raw';
+import mapPin from '@tabler/icons/outline/map-pin.svg?raw';
+import strategy from '@tabler/icons/outline/chess-knight.svg?raw';
+import professionalism from '@tabler/icons/outline/briefcase.svg?raw';
+import creativity from '@tabler/icons/outline/bulb.svg?raw';
+
+const icons = {
+  linkedin,
+  github,
+  whatsapp,
+  youtube,
+  mail,
+  phone,
+  external,
+  play,
+  arrowLeft,
+  arrowRight,
+  arrowUp,
+  chevronLeft,
+  chevronRight,
+  chevronDown,
+  close,
+  mapPin,
+  strategy,
+  professionalism,
+  creativity,
+};
+
+export type IconName = keyof typeof icons;
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className = 'size-5' } = Astro.props;
+
+// Keep viewBox/fill/stroke from the source SVG, drop its size, class and empty bounding path
+const [, attrs = '', inner = ''] = icons[name].match(/<svg([^>]*)>([\s\S]*)<\/svg>/) ?? [];
+const keptAttrs = attrs.replace(/\s(?:width|height|class)="[^"]*"/g, '').replace(/\s+/g, ' ');
+const body = inner.replace(/<path stroke="none" d="M0 0h24v24H0z" fill="none"\s*\/>/, '').trim();
+const svg = `<svg${keptAttrs} class="${className}" aria-hidden="true" focusable="false">${body}</svg>`;
+---
+
+<Fragment set:html={svg} />

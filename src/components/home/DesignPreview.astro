@@ -1,0 +1,35 @@
+---
+import DesignWorkCard from '../design/DesignWorkCard.astro';
+import ButtonLink from '../ui/ButtonLink.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getDesignWorks } from '../../lib/content';
+import { localizePath, useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const featured = (await getDesignWorks()).filter((work) => work.data.featured).slice(0, 4);
+---
+
+<section aria-labelledby="design-title" class="bg-surface">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading id="design-title" title={t('design.title')} intro={t('design.intro')} />
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      {
+        featured.map((work) => (
+          <li data-reveal>
+            <DesignWorkCard work={work} lang={lang} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-12 flex justify-center" data-reveal>
+      <ButtonLink href={localizePath('/proyectos/', lang)} lang={lang} variant="secondary" icon="arrowRight" iconAfter>
+        {t('design.more')}
+      </ButtonLink>
+    </div>
+  </div>
+</section>

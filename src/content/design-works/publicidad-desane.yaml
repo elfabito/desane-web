@@ -1,0 +1,15 @@
+title: Publicidad Desane
+subtitle: { es: "Proyecto propio", en: "Own project" }
+description:
+  es: "Piezas propias para redes sociales: animaciones 2D, 3D y edición de video."
+  en: "Own pieces for social media: 2D and 3D animation and video editing."
+services:
+  - { es: "Animación 2D", en: "2D animation" }
+  - { es: "Animación 3D", en: "3D animation" }
+  - { es: "Edición de video", en: "Video editing" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/publicidad-desane/01-vlcsnap-2018-12-14-12h14m38s282.jpg
+    alt: { es: "Fotograma de una animación 3D con un personaje y la bandera de Uruguay", en: "Frame from a 3D animation featuring a character and the Uruguayan flag" }
+videos: [WwNuJ8b7KTg, gQlcFESc_k4, EbaJ45T8Cdg, m7652s5kn7I, 5zqdC6AY_rM, HAIkyxzmodY, PGWm8cmH17g, ErjN_n0LOkg, Z8f0e_NByHE, Nca-UOrhWLM, 3EZxQvvMsno]
+order: 3

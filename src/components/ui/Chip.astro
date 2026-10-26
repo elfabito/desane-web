@@ -1,0 +1,16 @@
+---
+interface Props {
+  tone?: 'sea' | 'surface';
+}
+
+const { tone = 'sea' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-text ring-1 ring-border',
+    tone === 'sea' ? 'bg-sea-soft' : 'bg-surface',
+  ]}
+>
+  <slot />
+</span>

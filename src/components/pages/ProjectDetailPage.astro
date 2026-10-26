@@ -1,0 +1,142 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../PageHeader.astro';
+import DesignGallery from '../design/DesignGallery.astro';
+import ButtonLink from '../ui/ButtonLink.astro';
+import Chip from '../ui/Chip.astro';
+import Icon from '../ui/Icon.astro';
+import Lightbox from '../ui/Lightbox.astro';
+import LiteYouTube from '../ui/LiteYouTube.astro';
+import { getDesignWorks } from '../../lib/content';
+import { localizePath, useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  work: CollectionEntry<'design-works'>;
+}
+
+const { lang, work } = Astro.props;
+const t = useTranslations(lang);
+const { title, subtitle, description, services, images, videos } = work.data;
+const projectsPath = localizePath('/proyectos/', lang);
+
+// Previous and next follow the same order as the grid, without wrapping around
+const works = await getDesignWorks();
+const index = works.findIndex(({ id }) => id === work.id);
+const neighbors = [
+  { rel: 'prev', label: t('project.prev'), work: index > 0 ? works[index - 1] : undefined },
+  { rel: 'next', label: t('project.next'), work: works[index + 1] },
+] as const;
+
+const videoTitle = (n: number) =>
+  videos.length === 1
+    ? t('project.video.single', { title })
+    : t('project.video.multi', { title, n: String(n), total: String(videos.length) });
+---
+
+<BaseLayout lang={lang} title={t('meta.project.title', { title })} description={description[lang]}>
+  <PageHeader slot="header" lang={lang} />
+  <div class="container-page py-10 md:py-14">
+    <a
+      href={projectsPath}
+      class="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent-strong transition-colors hover:text-text"
+    >
+      <Icon name="arrowLeft" class="size-4" />
+      {t('project.back')}
+    </a>
+
+    <article aria-labelledby="project-title" class="mt-4">
+      <header class="max-w-3xl">
+        <p
+          class="mb-3 inline-flex rounded-full bg-sea-soft px-3 py-1 text-xs font-bold tracking-[0.15em] text-accent-strong uppercase ring-1 ring-border"
+        >
+          {subtitle[lang]}
+        </p>
+        <h1 id="project-title" class="text-4xl font-extrabold tracking-tight md:text-5xl">{title}</h1>
+        <span class="mt-4 block h-1 w-14 rounded-full bg-accent" aria-hidden="true"></span>
+        <p class="mt-5 text-lg leading-relaxed text-pretty text-muted md:text-xl">{description[lang]}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h2 class="text-sm font-bold tracking-[0.15em] text-accent-strong uppercase">{t('project.services')}</h2>
+          <ul class="flex flex-wrap gap-2">
+            {
+              services.map((service) => (
+                <li>
+                  <Chip>{service[lang]}</Chip>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </header>
+
+      {
+        videos.length > 0 && (
+          <section aria-labelledby="videos-title" class="mt-12 md:mt-16">
+            <h2 id="videos-title" class="text-2xl font-bold tracking-tight">
+              {t('project.videos')}
+            </h2>
+            {videos.length === 1 ? (
+              <div class="mt-6 max-w-4xl">
+                <LiteYouTube id={videos[0]} title={videoTitle(1)} lang={lang} eager />
+              </div>
+            ) : (
+              <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {videos.map((id, i) => (
+                  <li>
+                    <LiteYouTube id={id} title={videoTitle(i + 1)} lang={lang} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )
+      }
+
+      <section aria-labelledby="gallery-title" class="mt-12 md:mt-16">
+        <h2 id="gallery-title" class="text-2xl font-bold tracking-tight">{t('project.gallery')}</h2>
+        <DesignGallery images={images} lang={lang} eagerFirst={videos.length === 0} class="mt-6" />
+      </section>
+    </article>
+
+    <nav aria-label={t('project.nav')} class="mt-16 border-t border-border pt-10 md:mt-20">
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {
+          neighbors.map(
+            ({ rel, label, work: neighbor }) =>
+              neighbor && (
+                <li class:list={[rel === 'next' && 'sm:col-start-2 sm:text-right']}>
+                  <a
+                    href={localizePath(`/proyectos/${neighbor.id}/`, lang)}
+                    rel={rel}
+                    class="group block h-full rounded-2xl bg-surface p-5 ring-1 ring-border transition-colors hover:ring-accent-strong"
+                  >
+                    <span
+                      class:list={[
+                        'flex items-center gap-2 text-sm font-semibold text-accent-strong',
+                        rel === 'next' && 'sm:justify-end',
+                      ]}
+                    >
+                      {rel === 'prev' && <Icon name="arrowLeft" class="size-4" />}
+                      {label}
+                      {rel === 'next' && <Icon name="arrowRight" class="size-4" />}
+                    </span>
+                    <span class="mt-2 block text-lg font-bold transition-colors group-hover:text-accent-strong">
+                      {neighbor.data.title}
+                    </span>
+                    <span class="block text-sm text-muted">{neighbor.data.subtitle[lang]}</span>
+                  </a>
+                </li>
+              ),
+          )
+        }
+      </ul>
+      <div class="mt-10 flex justify-center">
+        <ButtonLink href={projectsPath} lang={lang} variant="secondary" icon="arrowLeft">
+          {t('project.back')}
+        </ButtonLink>
+      </div>
+    </nav>
+  </div>
+  <Lightbox lang={lang} />
+</BaseLayout>

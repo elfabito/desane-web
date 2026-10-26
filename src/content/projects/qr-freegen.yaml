@@ -1,0 +1,17 @@
+title: QR FreeGen
+subtitle:
+  es: SaaS de generación de códigos QR
+  en: QR code generation SaaS
+stack: [Next.js 16, React 19, TypeScript, Supabase, PostgreSQL, Stripe, Tailwind CSS, Vercel]
+description:
+  es: SaaS freemium de códigos QR. En el plan gratuito, los códigos estáticos se generan por completo en el navegador, sin registro y sin enviar datos a un servidor. El plan Pro suma QR dinámicos editables, analíticas de escaneo, generación masiva desde CSV, logos personalizados, carpetas y plantillas de estilo reutilizables.
+  en: Freemium QR code SaaS. On the free plan, static codes are generated entirely in the browser, with no signup and no data sent to a server. The Pro plan adds editable dynamic codes, scan analytics, bulk generation from CSV, custom logos, folders and reusable style templates.
+image: ../../assets/desarrollo/qr-freegen.png
+imageAlt:
+  es: Página de inicio de QR FreeGen con el generador de códigos QR
+  en: QR FreeGen home page with the QR code generator
+links:
+  demo: https://qr.desane.com.uy/
+  github: https://github.com/elfabito/qrfreeGen
+order: 2
+featured: true

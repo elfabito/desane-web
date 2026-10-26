@@ -1,0 +1,72 @@
+---
+import Icon from './ui/Icon.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { getProfile } from '../lib/content';
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const { contact } = await getProfile();
+
+const socials = [
+  { icon: 'linkedin', label: 'LinkedIn', href: contact.linkedin },
+  { icon: 'github', label: 'GitHub', href: contact.github },
+] as const;
+---
+
+<header class="sky">
+  {/* Extra bottom padding leaves room for the profile photo that overlaps the sky */}
+  <div class="container-page flex flex-col items-center gap-5 pt-4 pb-20 md:items-end md:pb-10">
+    {/* ml-auto keeps the languages on the right when the bulb is hidden without JS */}
+    <div class="flex w-full items-center">
+      <ThemeToggle lang={lang} />
+      <div class="ml-auto">
+        <LanguageSwitcher lang={lang} />
+      </div>
+    </div>
+
+    <ul class="flex gap-3" aria-label={t('footer.social')}>
+      {
+        socials.map(({ icon, label, href }) => (
+          <li>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="grid size-12 place-items-center rounded-full bg-chip text-text ring-1 ring-black/5 backdrop-blur-sm transition-colors hover:text-accent-strong dark:ring-white/10"
+            >
+              <Icon name={icon} class="size-6" />
+              <span class="sr-only">
+                {label} {t('a11y.newTab')}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <address class="flex flex-col items-center gap-1 text-base not-italic md:items-end md:text-lg">
+      <a
+        href={`tel:${contact.phone.replace(/[^\d+]/g, '')}`}
+        class="inline-flex items-center gap-2 font-medium transition-colors hover:text-accent-strong"
+      >
+        <Icon name="phone" class="size-5 text-accent-strong" />
+        <span class="sr-only">{t('contact.phone')}:</span>
+        {contact.phone}
+      </a>
+      <a
+        href={`mailto:${contact.email}`}
+        class="inline-flex items-center gap-2 font-medium transition-colors hover:text-accent-strong"
+      >
+        <Icon name="mail" class="size-5 text-accent-strong" />
+        <span class="sr-only">{t('contact.email')}:</span>
+        {contact.email}
+      </a>
+    </address>
+  </div>
+</header>

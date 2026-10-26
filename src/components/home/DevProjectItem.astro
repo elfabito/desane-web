@@ -1,0 +1,101 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BrowserFrame from '../ui/BrowserFrame.astro';
+import Chip from '../ui/Chip.astro';
+import Icon, { type IconName } from '../ui/Icon.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+  /** Puts the image on the right in the alternating layout */
+  reverse?: boolean;
+  /** Stacked card used for the secondary projects */
+  compact?: boolean;
+}
+
+const { project, lang, reverse = false, compact = false } = Astro.props;
+const t = useTranslations(lang);
+const { title, subtitle, stack, description, image, imageAlt, links } = project.data;
+const Heading = compact ? 'h4' : 'h3';
+
+const linkItems = (
+  [
+    ['demo', 'external', links.demo],
+    ['github', 'github', links.github],
+    ['youtube', 'youtube', links.youtube],
+  ] as const
+)
+  .filter(([, , href]) => href)
+  .map(([kind, icon, href]) => ({
+    icon: icon as IconName,
+    href: href!,
+    label: t(`dev.link.${kind}`, { title }),
+  }));
+
+const addressBar = links.demo ? new URL(links.demo).host.replace(/^www\./, '') : title;
+---
+
+<article
+  class:list={[
+    'grid items-center gap-8',
+    compact ? 'h-full content-start' : 'md:grid-cols-2 md:gap-12 lg:gap-16',
+  ]}
+  data-reveal
+>
+  <div class:list={[reverse && 'md:order-2']}>
+    <BrowserFrame label={addressBar}>
+      <Picture
+        src={image}
+        alt={imageAlt[lang]}
+        widths={compact ? [480, 800, 1080] : [480, 800, 1200, 1600]}
+        sizes="(min-width: 1152px) 34rem, (min-width: 768px) 46vw, calc(100vw - 2rem)"
+        formats={['avif']}
+        fallbackFormat="webp"
+        class="block h-auto w-full"
+      />
+    </BrowserFrame>
+  </div>
+
+  <div>
+    <Heading class:list={['font-bold tracking-tight', compact ? 'text-2xl' : 'text-2xl md:text-3xl']}>
+      {title}
+    </Heading>
+    <p class="mt-1 font-semibold text-accent-strong">{subtitle[lang]}</p>
+    <p class="mt-4 leading-relaxed text-pretty text-muted">{description[lang]}</p>
+
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label={t('dev.stack', { title })}>
+      {
+        stack.map((tech) => (
+          <li>
+            <Chip>{tech}</Chip>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      linkItems.length > 0 && (
+        <ul class="mt-6 flex gap-2" aria-label={t('dev.links', { title })}>
+          {linkItems.map(({ icon, href, label }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={label}
+                class="grid size-12 place-items-center rounded-full bg-surface text-text ring-1 ring-border transition-colors hover:text-accent-strong hover:ring-accent-strong"
+              >
+                <Icon name={icon} class="size-5" />
+                <span class="sr-only">
+                  {label} {t('a11y.newTab')}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

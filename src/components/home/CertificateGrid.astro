@@ -1,0 +1,76 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import { getCertificates } from '../../lib/content';
+import { formatDate, useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const certificates = await Promise.all(
+  (await getCertificates()).map(async ({ id, data }) => ({
+    id,
+    ...data,
+    large: await getImage({ src: data.image, width: Math.min(data.image.width, 1600), format: 'webp' }),
+  })),
+);
+---
+
+<ul class="grid grid-cols-1 gap-5 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  {
+    certificates.map(({ title, institution, date, image, large, verifyUrl, credentialId }) => (
+      <li>
+        <article class="flex h-full flex-col overflow-hidden rounded-xl bg-surface ring-1 ring-border">
+          <a
+            href={large.src}
+            data-lightbox="certificates"
+            data-alt={`${title}, ${institution}`}
+            data-caption={`${title} · ${institution} · ${formatDate(date, lang)}`}
+            class="group block overflow-hidden bg-white p-2"
+          >
+            <Picture
+              src={image}
+              alt=""
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1280px) 16rem, (min-width: 1024px) 30vw, (min-width: 420px) 45vw, calc(100vw - 2rem)"
+              formats={['avif']}
+              fallbackFormat="webp"
+              class="aspect-[4/3] w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+            <span class="sr-only">{t('education.enlarge', { title })}</span>
+          </a>
+          <div class="flex flex-1 flex-col p-4">
+            <h4 class="text-sm leading-snug font-bold">{title}</h4>
+            <p class="mt-1 text-sm text-muted">{institution}</p>
+            <div class="mt-auto flex items-center justify-between gap-3 pt-3 text-xs text-muted">
+              <time datetime={date}>{formatDate(date, lang)}</time>
+              {verifyUrl && (
+                <a
+                  href={verifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex min-h-6 items-center gap-1 font-semibold text-accent-strong hover:underline"
+                >
+                  {t('education.verify')}
+                  <span class="sr-only">
+                    {title} {t('a11y.newTab')}
+                  </span>
+                  <Icon name="external" class="size-3.5" />
+                </a>
+              )}
+            </div>
+            {credentialId && (
+              <p class="mt-1 text-xs text-muted">
+                {t('education.credential')}: <span class="font-mono">{credentialId}</span>
+              </p>
+            )}
+          </div>
+        </article>
+      </li>
+    ))
+  }
+</ul>

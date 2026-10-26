@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../Header.astro';
+import Hero from '../home/Hero.astro';
+import Values from '../home/Values.astro';
+import DevProjects from '../home/DevProjects.astro';
+import Skills from '../home/Skills.astro';
+import Education from '../home/Education.astro';
+import ClientSites from '../home/ClientSites.astro';
+import DesignPreview from '../home/DesignPreview.astro';
+import Contact from '../home/Contact.astro';
+import Lightbox from '../ui/Lightbox.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} title={t('meta.home.title')} description={t('meta.home.description')}>
+  <Header slot="header" lang={lang} />
+  <Hero lang={lang} />
+  <Values lang={lang} />
+  <DevProjects lang={lang} />
+  <Skills lang={lang} />
+  <Education lang={lang} />
+  <ClientSites lang={lang} />
+  <DesignPreview lang={lang} />
+  <Contact lang={lang} />
+  <Lightbox lang={lang} />
+</BaseLayout>

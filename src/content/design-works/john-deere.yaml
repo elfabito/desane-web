@@ -1,0 +1,17 @@
+title: John Deere
+subtitle: { es: "Maquinaria agrícola", en: "Agricultural machinery" }
+description:
+  es: "Diseño de la revista y animación 2D para la Feria Original John Deere 2016."
+  en: "Magazine design and 2D animation for the 2016 Feria Original John Deere."
+services:
+  - { es: "Diseño de revista", en: "Magazine design" }
+  - { es: "Animación 2D", en: "2D animation" }
+categories: [animaciones, diseno-grafico]
+images:
+  - src: ../../assets/proyectos/john-deere/01-tapa-y-contratapa-web.jpg
+    alt: { es: "Tapa y contratapa de la revista de la Feria Original John Deere", en: "Front and back cover of the Feria Original John Deere magazine" }
+  - src: ../../assets/proyectos/john-deere/02-revista-abierta-web-1.jpg
+    alt: { es: "Doble página interior de la revista John Deere", en: "Inside spread of the John Deere magazine" }
+videos: [KGRKjGgpvxo]
+order: 5
+featured: true

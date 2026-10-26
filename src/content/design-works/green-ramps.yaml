@@ -1,0 +1,16 @@
+title: Green Ramps
+subtitle: { es: "Skateboarding", en: "Skateboarding" }
+description:
+  es: "Construcción de rampas y obstáculos de skate."
+  en: "Builds skate ramps and obstacles."
+services:
+  - { es: "Logo", en: "Logo" }
+  - { es: "Afiche", en: "Poster" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/green-ramps/01-green-ramps-afiche-2.jpg
+    alt: { es: "Afiche de Green Ramps con fotos de rampas de skate", en: "Green Ramps poster with photos of skate ramps" }
+  - src: ../../assets/proyectos/green-ramps/02-green-ramps-logo.jpg
+    alt: { es: "Logo de Green Ramps", en: "Green Ramps logo" }
+order: 19
+featured: true

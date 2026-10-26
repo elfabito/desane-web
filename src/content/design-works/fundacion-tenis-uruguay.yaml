@@ -1,0 +1,15 @@
+title: Fundación Tenis Uruguay
+subtitle: { es: "Organización no gubernamental", en: "Non-governmental organization" }
+description:
+  es: "ONG dedicada a la promoción y enseñanza del tenis como actividad educativa y formadora de valores. Colaboramos con el diseño de su página web y flyers."
+  en: "NGO that promotes and teaches tennis as an educational activity that builds values. We worked on the design of their website and flyers."
+services:
+  - { es: "Diseño web", en: "Web design" }
+  - { es: "Flyers", en: "Flyers" }
+categories: [diseno-grafico]
+images:
+  - src: ../../assets/proyectos/fundacion-tenis-uruguay/01-mockup-fundacion-flyer.jpg
+    alt: { es: "Mockup de la invitación de la Fundación Tenis Uruguay a su jornada de integración", en: "Mockup of the Fundación Tenis Uruguay invitation to its integration day" }
+  - src: ../../assets/proyectos/fundacion-tenis-uruguay/02-roberto-canessa.jpg
+    alt: { es: "Flyers de la charla de Roberto Canessa para la Fundación Tenis Uruguay", en: "Flyers for Roberto Canessa's talk for Fundación Tenis Uruguay" }
+order: 15

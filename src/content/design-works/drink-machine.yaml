@@ -1,0 +1,14 @@
+title: Drink Machine
+subtitle: { es: "Resto-bar", en: "Restaurant and bar" }
+description:
+  es: "Resto-bar ubicado en Punta del Este. Animación de logo."
+  en: "Restaurant and bar in Punta del Este. Logo animation."
+services:
+  - { es: "Animación 2D", en: "2D animation" }
+  - { es: "After Effects", en: "After Effects" }
+categories: [animaciones]
+images:
+  - src: ../../assets/proyectos/drink-machine/01-maxresdefault.jpg
+    alt: { es: "Logo de Drink Machine Kitchen & Bar, fotograma de la animación", en: "Drink Machine Kitchen & Bar logo, frame from the animation" }
+videos: [Ud6QX4sfBlY]
+order: 16

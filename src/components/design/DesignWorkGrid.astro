@@ -1,0 +1,105 @@
+---
+import DesignWorkCard from './DesignWorkCard.astro';
+import { designCategories } from '../../content.config';
+import { getDesignWorks } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const works = await getDesignWorks();
+
+const countLabel = (count: number) =>
+  t(count === 1 ? 'projects.count.one' : 'projects.count.other', { count: String(count) });
+
+// A work can sit in several categories, so the category counts may add up to more than the total
+const filters = [
+  { id: 'all', label: t('projects.all'), count: works.length },
+  ...designCategories.map((category) => ({
+    id: category,
+    label: t(`projects.category.${category}`),
+    count: works.filter((work) => work.data.categories.includes(category)).length,
+  })),
+];
+---
+
+<div data-design-grid>
+  {/* Filtering needs JS: without it the buttons stay hidden and every work is listed */}
+  <div role="group" aria-label={t('projects.filter')} class="mb-10 flex flex-wrap gap-2 no-js:hidden">
+    {
+      filters.map(({ id, label, count }) => (
+        <button
+          type="button"
+          data-filter={id}
+          aria-pressed={id === 'all' ? 'true' : 'false'}
+          aria-controls="design-works"
+          class="group inline-flex min-h-11 items-center gap-2 rounded-full bg-surface px-4 text-sm font-semibold ring-1 ring-border transition-colors aria-pressed:bg-text aria-pressed:text-bg aria-pressed:ring-text aria-[pressed=false]:hover:text-accent-strong aria-[pressed=false]:hover:ring-accent-strong"
+        >
+          {label}
+          <span
+            class="min-w-6 rounded-full bg-sea-soft px-1.5 py-0.5 text-center text-xs text-accent-strong tabular-nums group-aria-pressed:bg-bg/15 group-aria-pressed:text-bg"
+            aria-hidden="true"
+          >
+            {count}
+          </span>
+          <span class="sr-only">({countLabel(count)})</span>
+        </button>
+      ))
+    }
+  </div>
+  <p
+    class="sr-only"
+    aria-live="polite"
+    data-filter-status
+    data-one={t('projects.showing.one')}
+    data-other={t('projects.showing.other')}
+  >
+  </p>
+
+  <ul id="design-works" class="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      works.map((work, i) => (
+        <li data-categories={work.data.categories.join(' ')}>
+          <DesignWorkCard
+            work={work}
+            lang={lang}
+            headingLevel="h2"
+            sizes="(min-width: 1152px) 22rem, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, calc(100vw - 2rem)"
+            loading={i < 3 ? 'eager' : 'lazy'}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-design-grid]');
+
+  if (root) {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const items = [...root.querySelectorAll<HTMLElement>('[data-categories]')];
+    const status = root.querySelector<HTMLElement>('[data-filter-status]')!;
+
+    const apply = (filter: string) => {
+      let shown = 0;
+      for (const item of items) {
+        const match = filter === 'all' || item.dataset.categories!.split(' ').includes(filter);
+        item.hidden = !match;
+        if (match) shown++;
+      }
+      for (const button of buttons) {
+        button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+      }
+      const template = shown === 1 ? status.dataset.one : status.dataset.other;
+      status.textContent = template!.replace('{count}', String(shown));
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => apply(button.dataset.filter!));
+    }
+  }
+</script>

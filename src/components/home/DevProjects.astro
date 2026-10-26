@@ -1,0 +1,49 @@
+---
+import DevProjectItem from './DevProjectItem.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { getProjects } from '../../lib/content';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const projects = await getProjects();
+const featured = projects.filter((project) => project.data.featured);
+const others = projects.filter((project) => !project.data.featured);
+---
+
+<section id="desarrollo" aria-labelledby="dev-title">
+  <div class="container-page py-16 md:py-24">
+    <SectionHeading id="dev-title" eyebrow={t('dev.eyebrow')} title={t('dev.title')} intro={t('dev.intro')} />
+
+    <ol class="space-y-20 md:space-y-28">
+      {
+        featured.map((project, i) => (
+          <li>
+            <DevProjectItem project={project} lang={lang} reverse={i % 2 === 1} />
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      others.length > 0 && (
+        <div class="mt-24 md:mt-32">
+          <h3 class="text-2xl font-bold tracking-tight" data-reveal>
+            {t('dev.more')}
+          </h3>
+          <ul class="mt-8 grid gap-12 md:grid-cols-2 md:gap-10">
+            {others.map((project) => (
+              <li>
+                <DevProjectItem project={project} lang={lang} compact />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</section>

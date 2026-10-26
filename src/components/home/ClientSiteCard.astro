@@ -1,0 +1,71 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BrowserFrame from '../ui/BrowserFrame.astro';
+import Chip from '../ui/Chip.astro';
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  site: CollectionEntry<'client-sites'>;
+  lang: Lang;
+}
+
+const platformNames = {
+  wordpress: 'WordPress',
+  bubble: 'Bubble',
+  replit: 'Replit',
+  lovable: 'Lovable',
+  webflow: 'Webflow',
+} as const;
+
+const { site, lang } = Astro.props;
+const t = useTranslations(lang);
+const { title, platform, year } = site.data;
+
+// A site with a single screenshot uses it for both sizes (the schema guarantees at least one)
+const desktopSrc = (site.data.desktop ?? site.data.mobile)!;
+const mobileSrc = (site.data.mobile ?? site.data.desktop)!;
+// Very tall captures: a lower quality keeps each one light without visible loss at preview size
+const desktop = await getImage({ src: desktopSrc, widths: [480, 960], format: 'webp', quality: 70 });
+const mobile = await getImage({ src: mobileSrc, widths: [400, 800], format: 'webp', quality: 70 });
+---
+
+<article data-reveal>
+  <BrowserFrame label={title}>
+    <div
+      class="preview-scroll h-[28rem] overflow-y-auto md:h-72 lg:h-80"
+      tabindex="0"
+      role="region"
+      aria-label={t('clients.preview', { title })}
+    >
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          type="image/webp"
+          srcset={desktop.srcSet.attribute}
+          sizes="(min-width: 1152px) 22rem, (min-width: 1024px) 30vw, 46vw"
+          width={desktop.attributes.width}
+          height={desktop.attributes.height}
+        />
+        <img
+          src={mobile.src}
+          srcset={mobile.srcSet.attribute}
+          sizes="calc(100vw - 2rem)"
+          width={mobile.attributes.width}
+          height={mobile.attributes.height}
+          alt={t('clients.screenshot', { title })}
+          loading="lazy"
+          decoding="async"
+          class="block h-auto w-full"
+        />
+      </picture>
+    </div>
+  </BrowserFrame>
+  <div class="mt-4 flex items-center justify-between gap-3">
+    <h3 class="text-lg font-bold">{title}</h3>
+    <p class="flex shrink-0 items-center gap-2 text-sm text-muted">
+      <Chip tone="surface">{platformNames[platform]}</Chip>
+      <span>{year}</span>
+    </p>
+  </div>
+</article>
