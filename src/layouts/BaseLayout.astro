@@ -3,15 +3,20 @@ import '../styles/global.css';
 import manropeFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 import bricolageFont from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
 import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
 import { useTranslations, type Lang } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
   title: string;
   description: string;
+  /** Share image, see socialCardPath */
+  card?: string;
+  /** For the 404 pages: they answer any missing URL, so no canonical, alternates or share tags */
+  noindex?: boolean;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, card = 'index', noindex = false } = Astro.props;
 const t = useTranslations(lang);
 ---
 
@@ -20,11 +25,11 @@ const t = useTranslations(lang);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <Seo lang={lang} title={title} description={description} card={card} noindex={noindex} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <slot name="head" />
     <link rel="preload" href={manropeFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={bricolageFont} as="font" type="font/woff2" crossorigin />
     <script is:inline>

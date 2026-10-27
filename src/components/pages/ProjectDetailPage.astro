@@ -35,7 +35,12 @@ const videoTitle = (n: number) =>
     : t('project.video.multi', { title, n: String(n), total: String(videos.length) });
 ---
 
-<BaseLayout lang={lang} title={t('meta.project.title', { title })} description={description[lang]}>
+<BaseLayout
+  lang={lang}
+  title={t('meta.project.title', { title })}
+  description={t('meta.project.description', { description: description[lang] })}
+  card={work.id}
+>
   <PageHeader slot="header" lang={lang} />
   <div class="container-page py-10 md:py-14">
     <a

@@ -2,7 +2,7 @@
 import DesignWorkCard from '../design/DesignWorkCard.astro';
 import ButtonLink from '../ui/ButtonLink.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
-import { getDesignWorks } from '../../lib/content';
+import { getFeaturedDesignWorks } from '../../lib/content';
 import { localizePath, useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const featured = (await getDesignWorks()).filter((work) => work.data.featured).slice(0, 4);
+const featured = await getFeaturedDesignWorks();
 ---
 
 <section aria-labelledby="design-title" class="bg-surface">

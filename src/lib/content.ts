@@ -18,6 +18,11 @@ export async function getDesignWorks() {
   return (await getCollection('design-works')).sort(byOrder);
 }
 
+/** Up to four works marked `featured`, shown on the home page. */
+export async function getFeaturedDesignWorks() {
+  return (await getDesignWorks()).filter((work) => work.data.featured).slice(0, 4);
+}
+
 export async function getClientSites() {
   return (await getCollection('client-sites', ({ data }) => data.visible)).sort(byOrder);
 }

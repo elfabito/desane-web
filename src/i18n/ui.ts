@@ -72,6 +72,7 @@ const es = {
   'meta.projects.description':
     'Trabajos de diseño gráfico, 3D y animación de Fabián Martínez: logos, papelería, flyers, renders y animaciones 2D para clientes de Uruguay.',
   'meta.project.title': '{title} · Diseño y animación · Fabián Martínez',
+  'meta.project.description': '{description} Del portfolio de diseño gráfico, 3D y animación de Fabián Martínez.',
   'projects.title': 'Diseño y animación',
   'projects.intro': 'Antes del código trabajé en diseño gráfico, 3D y animación, para clientes y para proyectos propios. Acá están todos esos trabajos.',
   'projects.filter': 'Filtrar por categoría',
@@ -164,6 +165,7 @@ const en: Record<keyof typeof es, string> = {
   'meta.projects.description':
     'Graphic design, 3D and animation work by Fabián Martínez: logos, stationery, flyers, renders and 2D animation for clients in Uruguay.',
   'meta.project.title': '{title} · Design and animation · Fabián Martínez',
+  'meta.project.description': '{description} From Fabián Martínez’s graphic design, 3D and animation portfolio.',
   'projects.title': 'Design and animation',
   'projects.intro': 'Before code, I worked in graphic design, 3D and animation, for clients and for my own projects. Here is all of that work.',
   'projects.filter': 'Filter by category',

@@ -1,0 +1,63 @@
+---
+import { getProfile } from '../lib/content';
+import { socialCardPath, socialCardSize } from '../lib/social-card';
+import { defaultLang, langs, translatePath, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  card: string;
+  noindex: boolean;
+}
+
+const { lang, title, description, card, noindex } = Astro.props;
+const { name } = await getProfile();
+
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const urlIn = (code: Lang) => absolute(translatePath(Astro.url.pathname, code));
+const canonical = urlIn(lang);
+const image = absolute(socialCardPath(lang, card));
+
+// Open Graph wants language and territory
+const ogLocales: Record<Lang, string> = { es: 'es_UY', en: 'en_US' };
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{
+  noindex ? (
+    <meta name="robots" content="noindex" />
+  ) : (
+    <>
+      <link rel="canonical" href={canonical} />
+      {langs.map((code) => (
+        <link rel="alternate" hreflang={code} href={urlIn(code)} />
+      ))}
+      <link rel="alternate" hreflang="x-default" href={urlIn(defaultLang)} />
+
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={name} />
+      <meta property="og:locale" content={ogLocales[lang]} />
+      {langs
+        .filter((code) => code !== lang)
+        .map((code) => (
+          <meta property="og:locale:alternate" content={ogLocales[code]} />
+        ))}
+      <meta property="og:url" content={canonical} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content={String(socialCardSize.width)} />
+      <meta property="og:image:height" content={String(socialCardSize.height)} />
+      <meta property="og:image:alt" content={title} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content={title} />
+    </>
+  )
+}

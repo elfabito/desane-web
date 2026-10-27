@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<BaseLayout lang={lang} title={t('meta.notFound.title')} description={t('notFound.text')}>
+<BaseLayout lang={lang} title={t('meta.notFound.title')} description={t('notFound.text')} noindex>
   {/* This page answers any missing URL, so the language switcher goes to the other home */}
   <PageHeader slot="header" lang={lang} pathname="/" />
   <div class="container-page py-20 md:py-28">

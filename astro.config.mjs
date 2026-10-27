@@ -1,6 +1,7 @@
 // @ts-check
 import { rename, rmdir } from 'node:fs/promises';
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Astro writes the English 404 to en/404/index.html, but Cloudflare Pages answers a missing
@@ -23,7 +24,11 @@ export default defineConfig({
     defaultLocale: 'es',
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [englishNotFound],
+  integrations: [
+    // The 404 pages answer missing URLs, they are not pages of their own
+    sitemap({ filter: (page) => !/\/404\/?$/.test(new URL(page).pathname) }),
+    englishNotFound,
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

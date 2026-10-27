@@ -12,7 +12,12 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<BaseLayout lang={lang} title={t('meta.projects.title')} description={t('meta.projects.description')}>
+<BaseLayout
+  lang={lang}
+  title={t('meta.projects.title')}
+  description={t('meta.projects.description')}
+  card="proyectos"
+>
   <PageHeader slot="header" lang={lang} />
   <div class="container-page py-12 md:py-16">
     <div class="mb-10 max-w-2xl md:mb-12">
