@@ -39,7 +39,8 @@ const addressBar = links.demo ? new URL(links.demo).host.replace(/^www\./, '') :
 
 <article
   class:list={[
-    'grid items-center gap-8',
+    // grid-cols-1 is minmax(0, 1fr): a long address bar label gets truncated instead of widening the page
+    'grid grid-cols-1 items-center gap-8',
     compact ? 'h-full content-start' : 'md:grid-cols-2 md:gap-12 lg:gap-16',
   ]}
   data-reveal
