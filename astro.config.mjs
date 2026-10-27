@@ -4,8 +4,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Astro writes the English 404 to en/404/index.html, but Cloudflare Pages answers a missing
-// URL with the closest 404.html, so it has to sit at en/404.html to cover /en/*
+// Astro writes the English 404 to en/404/index.html, but Cloudflare answers a missing URL
+// with the closest 404.html (see wrangler.jsonc), so it has to sit at en/404.html to cover /en/*
 /** @type {import('astro').AstroIntegration} */
 const englishNotFound = {
   name: 'english-404',
