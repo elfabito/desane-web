@@ -12,10 +12,11 @@ Personal portfolio of Fabián Martínez, Full-Stack Developer: [desane.com.uy](h
 - **Works without JavaScript:** scripts only add filters, the image lightbox, video players and the theme toggle on top of plain HTML.
 - **Accessible:** keyboard navigation, screen reader labels and respect for reduced motion.
 - **Light video embeds:** YouTube thumbnails with a play button; the player loads from youtube-nocookie.com only after a click.
+- **Search and sharing:** canonical URLs, hreflang between both languages, a sitemap, robots.txt and Person structured data. Every page gets its own share image, drawn at build time from the content.
 
 ## Stack
 
-[Astro](https://astro.build) 7 · TypeScript (strict) · [Tailwind CSS](https://tailwindcss.com) 4 · Content collections in YAML validated with Zod · [Tabler Icons](https://tabler.io/icons)
+[Astro](https://astro.build) 7 · TypeScript (strict) · [Tailwind CSS](https://tailwindcss.com) 4 · Content collections in YAML validated with Zod · [Tabler Icons](https://tabler.io/icons) · [Satori](https://github.com/vercel/satori) and [sharp](https://sharp.pixelplumbing.com) for the share images
 
 ## Getting started
 
@@ -41,6 +42,8 @@ Everything shown on the site lives in `src/content/` as YAML, with each text in 
 | `src/content/certificates/` | Certificates, with their official title in the language it was issued in (`lang`) |
 | `src/content/client-sites/` | Client websites, shown as scrollable screenshots (`visible: false` hides one) |
 | `src/i18n/ui.ts` | Interface texts in both languages |
+
+Share images (`/og/{lang}/*.jpg`, 1200×630) are drawn from this content by `src/lib/social-card.ts`, so they follow any change on the next build. The favicon files in `public/` come from the logo of the previous site.
 
 The schemas in `src/content.config.ts` check every entry, so a missing field or translation fails the build with a clear message. In `src/i18n/ui.ts`, a text missing from one language fails `npm run check`.
 
