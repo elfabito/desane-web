@@ -1,0 +1,50 @@
+---
+import { getImage } from 'astro:assets';
+import { getProfile } from '../../lib/content';
+import { langs, localizePath, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const profile = await getProfile();
+const site = new URL('/', Astro.site).href;
+const photo = await getImage({ src: profile.photo, width: 800, format: 'jpg' });
+const [locality, country] = profile.location.split(', ');
+
+// The same @id in both languages: one person and one site, described in the language of the page
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site}#website`,
+      url: site,
+      name: profile.name,
+      inLanguage: langs,
+      publisher: { '@id': `${site}#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site}#person`,
+      name: profile.name,
+      alternateName: profile.fullName,
+      jobTitle: profile.role[lang],
+      description: profile.summary[lang],
+      url: new URL(localizePath('/', lang), Astro.site).href,
+      image: new URL(photo.src, Astro.site).href,
+      email: profile.contact.email,
+      telephone: profile.contact.phone.replace(/[^\d+]/g, ''),
+      address: { '@type': 'PostalAddress', addressLocality: locality, addressCountry: country },
+      sameAs: [profile.contact.linkedin, profile.contact.github],
+      knowsAbout: profile.skills.flatMap(({ items }) =>
+        items.map((item) => (typeof item === 'string' ? item : item[lang])),
+      ),
+    },
+  ],
+};
+---
+
+{/* `<` escaped so no text in the data can close the script tag */}
+<script type="application/ld+json" set:html={JSON.stringify(schema).replaceAll('<', '\\u003c')} />

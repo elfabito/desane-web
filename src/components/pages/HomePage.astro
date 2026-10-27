@@ -9,6 +9,7 @@ import Education from '../home/Education.astro';
 import ClientSites from '../home/ClientSites.astro';
 import DesignPreview from '../home/DesignPreview.astro';
 import Contact from '../home/Contact.astro';
+import PersonSchema from '../home/PersonSchema.astro';
 import Lightbox from '../ui/Lightbox.astro';
 import { useTranslations, type Lang } from '../../i18n/utils';
 
@@ -21,6 +22,7 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout lang={lang} title={t('meta.home.title')} description={t('meta.home.description')}>
+  <PersonSchema slot="head" lang={lang} />
   <Header slot="header" lang={lang} />
   <Hero lang={lang} />
   <Values lang={lang} />
