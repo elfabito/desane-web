@@ -11,7 +11,7 @@ imageAlt:
   es: Página de inicio de DevOrganizer, planificación de proyectos con IA para desarrolladores
   en: DevOrganizer home page, AI-powered project planning for developers
 links:
-  demo: https://devorganizer.onrender.com/home
+  demo: https://devorganizer.desane.com.uy/
   github: https://github.com/elfabito/DevOrganizer
 order: 4
 featured: true
