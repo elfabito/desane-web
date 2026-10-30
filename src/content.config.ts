@@ -108,6 +108,8 @@ const clientSites = defineCollection({
         title: z.string(),
         platform: z.enum(['wordpress', 'bubble', 'replit', 'lovable', 'webflow']),
         year: z.number().int(),
+        // Only for sites that still represent the work: the others stay as previews
+        url: z.url().optional(),
         desktop: image().optional(),
         mobile: image().optional(),
         order: z.number().int(),

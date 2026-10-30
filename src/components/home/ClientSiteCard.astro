@@ -3,6 +3,7 @@ import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BrowserFrame from '../ui/BrowserFrame.astro';
 import Chip from '../ui/Chip.astro';
+import Icon from '../ui/Icon.astro';
 import { useTranslations, type Lang } from '../../i18n/utils';
 
 interface Props {
@@ -20,7 +21,8 @@ const platformNames = {
 
 const { site, lang } = Astro.props;
 const t = useTranslations(lang);
-const { title, platform, year } = site.data;
+const { title, platform, year, url } = site.data;
+const addressBar = url ? new URL(url).host.replace(/^www\./, '') : title;
 
 // A site with a single screenshot uses it for both sizes (the schema guarantees at least one)
 const desktopSrc = (site.data.desktop ?? site.data.mobile)!;
@@ -31,7 +33,7 @@ const mobile = await getImage({ src: mobileSrc, widths: [400, 800], format: 'web
 ---
 
 <article data-reveal>
-  <BrowserFrame label={title}>
+  <BrowserFrame label={addressBar}>
     <div
       class="preview-scroll h-[28rem] overflow-y-auto md:h-72 lg:h-80"
       tabindex="0"
@@ -62,7 +64,25 @@ const mobile = await getImage({ src: mobileSrc, widths: [400, 800], format: 'web
     </div>
   </BrowserFrame>
   <div class="mt-4 flex items-center justify-between gap-3">
-    <h3 class="text-lg font-bold">{title}</h3>
+    <h3 class="text-lg font-bold">
+      {
+        url ? (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={t('clients.visit', { title })}
+            class="inline-flex items-center gap-1.5 transition-colors hover:text-accent-strong"
+          >
+            {title}
+            <Icon name="external" class="size-4 shrink-0" />
+            <span class="sr-only">{t('a11y.newTab')}</span>
+          </a>
+        ) : (
+          title
+        )
+      }
+    </h3>
     <p class="flex shrink-0 items-center gap-2 text-sm text-muted">
       <Chip tone="surface">{platformNames[platform]}</Chip>
       <span>{year}</span>
