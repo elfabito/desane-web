@@ -11,6 +11,6 @@ imageAlt:
   es: Página de RegalBid con la app de subastas en un teléfono
   en: RegalBid landing page showing the auction app on a phone
 links:
-  demo: https://project-qswbe.vercel.app/
+  demo: https://app.regalbid.com/
 order: 3
 featured: true
